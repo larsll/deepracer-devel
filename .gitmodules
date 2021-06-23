@@ -1,0 +1,9 @@
+[submodule "src/aws-deepracer-camera-pkg"]
+	path = src/aws-deepracer-camera-pkg
+	url = https://github.com/aws-deepracer/aws-deepracer-camera-pkg
+[submodule "src/aws-deepracer-interfaces-pkg"]
+	path = src/aws-deepracer-interfaces-pkg
+	url = https://github.com/larsll/aws-deepracer-interfaces-pkg
+[submodule "src/aws-deepracer-imu-pkg"]
+	path = src/aws-deepracer-imu-pkg
+	url = https://github.com/larsll/aws-deepracer-imu-pkg
