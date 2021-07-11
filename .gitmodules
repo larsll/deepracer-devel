@@ -4,3 +4,9 @@
 [submodule "src/aws-deepracer-imu-pkg"]
 	path = src/aws-deepracer-imu-pkg
 	url = https://github.com/larsll/aws-deepracer-imu-pkg
+[submodule "aws-deepracer-incar-video-pkg"]
+	path = aws-deepracer-incar-video-pkg
+	url = https://github.com/larsll/aws-deepracer-incar-video-pkg
+[submodule "src/aws-deepracer-incar-video-pkg"]
+	path = src/aws-deepracer-incar-video-pkg
+	url = https://github.com/larsll/aws-deepracer-incar-video-pkg
