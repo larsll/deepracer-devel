@@ -7,3 +7,6 @@
 [submodule "src/aws-deepracer-incar-video-pkg"]
 	path = src/aws-deepracer-incar-video-pkg
 	url = https://github.com/larsll/aws-deepracer-incar-video-pkg
+[submodule "src/aws-deepracer-interfaces-pkg"]
+	path = src/aws-deepracer-interfaces-pkg
+	url = https://github.com/aws-deepracer/aws-deepracer-interfaces-pkg
