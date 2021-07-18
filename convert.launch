@@ -1,0 +1,9 @@
+<launch >
+  <arg name="bag" />
+  <arg name="rate" default="0.6"/>
+  <arg name="use_sim_time" default="true"/>
+
+  <executable cmd="ros2 bag play -r $(var rate) $(var bag)" cwd="./output" output="screen" />
+  <node pkg="incar_video_pkg" exec="incar_video_edit_node" output="log" />
+  
+</launch>
