@@ -1,6 +1,6 @@
 <launch >
   <arg name="bag" />
-  <arg name="rate" default="0.6"/>
+  <arg name="rate" default="0.5"/>
   <arg name="use_sim_time" default="true"/>
 
   <executable cmd="ros2 bag play -r $(var rate) $(var bag)" cwd="./output" output="screen" />
