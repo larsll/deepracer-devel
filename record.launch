@@ -1,12 +1,16 @@
 <launch >
+  <arg name="output" default="output/deepracer-{}.mp4" />
   <node pkg="camera_pkg" exec="camera_node" output="log">
       <param name="downscale_images" type="int" value="2" /> 
       <param name="display_topic_enable" type="bool" value="False" /> 
   </node>
   <node pkg="imu_pkg" exec="imu_node" output="log" />
-  <node pkg="incar_video_pkg" exec="incar_video_capture_node" output="log" />
-  <!-- <executable cmd="ros2 bag record /video/sensor_stream" output="screen" cwd="./output" /> -->
+  <node pkg="incar_video_pkg" exec="incar_video_capture_node" output="log">
+      <param name="duplicate_frame" type="bool" value="True" /> 
+  </node>
+  <executable cmd="ros2 bag record /imu_msg/raw" output="screen" cwd="./output" />
   <node pkg="incar_video_pkg" exec="incar_video_edit_node" output="log">
       <param name="racecar_name" type="string" value="Duckworth" /> 
+      <param name="output_file_name" type="string" value="$(var output)" />
   </node>
 </launch>
