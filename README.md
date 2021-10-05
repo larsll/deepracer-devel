@@ -34,23 +34,14 @@ Open a terminal on the AWS DeepRacer device and run the following commands as th
 
         git submodule update --init --recursive
 
-1. Install the Python packages:
+1. Install the required packages:
 
         pip3 install smbus2
-
-1. Build the BMI160-i2c package:
-
-        (cd deps/BMI160-i2c; python3 setup.py build sdist)
-        pip3 install -U deps/BMI160-i2c/dist/BMI160_i2c-0.5.tar.gz
-        
+        sudo apt-get install ros-foxy-sensor-msgs ros-foxy-geometry-msgs
 
 1. Source the ROS 2 Foxy setup bash script:
 
         source /opt/ros/foxy/setup.bash 
-
-1. Resolve the dependencies:
-
-        sudo apt-get install ros-foxy-sensor-msgs ros-foxy-geometry-msgs
 
 1. Build the packages:
 
@@ -61,7 +52,7 @@ Open a terminal on the AWS DeepRacer device and run the following commands as th
         source install/local_setup.bash
 
 
-### Run the stack
+## Run the stack
 
 To launch the built stack on the AWS DeepRacer device, open another terminal on the AWS DeepRacer device and run the following commands:
 
