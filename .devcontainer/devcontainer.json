@@ -1,0 +1,22 @@
+{
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "USERNAME": "${localEnv:USER}"
+        }
+    },
+    "containerUser": "${localEnv:USER}",
+    "features": {},
+    // Any *default* container specific VS Code settings
+    "runArgs":["--device=/dev/video4"],
+ 
+    "settings": {
+        "terminal.integrated.profiles.linux": {
+            "bash (ROS)": {
+              "path": "/bin/bash",
+              "args": ["-c", "source /opt/ros/foxy/setup.bash; exec bash"]
+            }
+          },
+          "terminal.integrated.defaultProfile.linux": "bash (ROS)"
+    }
+}
