@@ -1,0 +1,4 @@
+git clone https://github.com/larsll/deepracer-video
+cd deepracer-video; git submodule update --init --recursive
+apt-get update && apt-get install ros-foxy-async-web-server-cpp ros-foxy-async-web-server-cpp python3-pip ros-foxy-cv-bridge ros-foxy-cv-bridge ros-foxy-sensor-msgs ros-foxy-geometry-msgs --no-install-recommends
+pip3 install opencv-python pillow
