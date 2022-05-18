@@ -6,10 +6,11 @@
         }
     },
     "containerUser": "${localEnv:USER}",
-    "features": {},
-    // Any *default* container specific VS Code settings
+    "extensions": ["ms-python.python"],
     "runArgs":["--device=/dev/video4"],
- 
+    "mounts": [
+        "source=deepracer-ros-bashhistory,target=/commandhistory,type=volume"
+    ],
     "settings": {
         "terminal.integrated.profiles.linux": {
             "bash (ROS)": {

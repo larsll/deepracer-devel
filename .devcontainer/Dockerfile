@@ -23,4 +23,11 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && usermod -a -G audio $USERNAME \
     && usermod -a -G video $USERNAME
 
+# Persist history
+RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" \
+    && mkdir /commandhistory \
+    && touch /commandhistory/.bash_history \
+    && chown -R $USERNAME /commandhistory \
+    && echo $SNIPPET >> "/home/$USERNAME/.bashrc"
+
 ENTRYPOINT ["/bin/bash", "source /opt/ros/foxy/setup.bash"]
