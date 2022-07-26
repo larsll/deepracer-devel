@@ -19,3 +19,6 @@
 [submodule "src/aws-deepracer-sensor-fusion-pkg"]
 	path = src/aws-deepracer-sensor-fusion-pkg
 	url = https://github.com/larsll/aws-deepracer-sensor-fusion-pkg/
+[submodule "src/aws-deepracer-inference-pkg"]
+	path = src/aws-deepracer-inference-pkg
+	url = https://github.com/aws-deepracer/aws-deepracer-inference-pkg

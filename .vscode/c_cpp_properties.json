@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/opt/ros/foxy/include/**",
-                "/usr/include/opencv4/"
+                "/usr/include/opencv4/",
+                "/opt/intel/openvino_2022.1/runtime/include/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
