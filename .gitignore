@@ -52,7 +52,8 @@ qtcreator-*
 CATKIN_IGNORE
 
 # VSCode
-.vscode/
+.vscode/**
+!.vscode/c_cpp_properties.json
 
 output/
 
