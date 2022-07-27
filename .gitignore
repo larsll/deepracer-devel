@@ -51,10 +51,6 @@ qtcreator-*
 # Catkin custom files
 CATKIN_IGNORE
 
-# VSCode
-.vscode/**
-!.vscode/c_cpp_properties.json
-
 output/
 
 *.out

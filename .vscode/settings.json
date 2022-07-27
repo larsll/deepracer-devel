@@ -1,0 +1,12 @@
+{
+    "cmake.configureOnOpen": false,
+    "python.autoComplete.extraPaths": [
+        "/opt/ros/foxy/lib/python3.8/site-packages/",
+        "./deps/BMI160-i2c"
+    ],
+    "python.analysis.extraPaths": [
+        "/opt/ros/foxy/lib/python3.8/site-packages/",
+        "./deps/BMI160-i2c",
+        "./install/deepracer_interfaces_pkg/lib/python3.8/site-packages"
+    ],
+}
