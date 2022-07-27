@@ -9,7 +9,9 @@
       <param name="mask_images" type="float" value="-0.1" />
       <param name="mask_images_color" type="float" value="0.5" />
   </node>
-  <node pkg="imu_pkg" namespace="imu_pkg" exec="imu_node" output="log" />
+  <node pkg="imu_pkg" namespace="imu_pkg" exec="imu_node" output="log">
+    <param name="bus_id" type="int" value="8" />
+  </node>
   <node pkg="sensor_fusion_pkg" namespace="sensor_fusion_pkg" exec="sensor_fusion_node" output="log" />
   <!--  <node pkg="incar_video_pkg" exec="incar_video_capture_node" output="log">
       <param name="duplicate_frame" type="bool" value="False" />
