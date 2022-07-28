@@ -15,7 +15,7 @@
         "terminal.integrated.profiles.linux": {
             "bash (ROS)": {
               "path": "/bin/bash",
-              "args": ["-c", "source /opt/ros/foxy/setup.bash; exec bash"]
+              "args": ["--init-file", "./script/bashrc"]
             }
           },
           "terminal.integrated.defaultProfile.linux": "bash (ROS)"
