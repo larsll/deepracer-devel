@@ -25,3 +25,6 @@
 [submodule "src/aws-deepracer-model-optimizer-pkg"]
 	path = src/aws-deepracer-model-optimizer-pkg
 	url = https://github.com/aws-deepracer/aws-deepracer-model-optimizer-pkg
+[submodule "src/aws-deepracer-navigation-pkg"]
+	path = src/aws-deepracer-navigation-pkg
+	url = https://github.com/aws-deepracer/aws-deepracer-navigation-pkg
