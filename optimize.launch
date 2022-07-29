@@ -1,0 +1,3 @@
+<launch >
+  <node pkg="model_optimizer_pkg" namespace="model_optimizer_pkg" exec="model_optimizer_node" output="log" />
+</launch>

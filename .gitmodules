@@ -22,3 +22,6 @@
 [submodule "src/aws-deepracer-inference-pkg"]
 	path = src/aws-deepracer-inference-pkg
 	url = https://github.com/aws-deepracer/aws-deepracer-inference-pkg
+[submodule "src/aws-deepracer-model-optimizer-pkg"]
+	path = src/aws-deepracer-model-optimizer-pkg
+	url = https://github.com/aws-deepracer/aws-deepracer-model-optimizer-pkg
