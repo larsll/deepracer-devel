@@ -1,0 +1,773 @@
+<?xml version="1.0" ?>
+<net name="Sample_single_cam/model" version="10">
+	<layers>
+		<layer id="0" name="main_level/agent/main/online/network_1/sub/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data offset="0" size="2" shape="1,1" element_type="f16"/>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="1" name="main_level/agent/main/online/network_0/observation/observation" type="Parameter" version="opset1">
+			<data shape="1,1,120,160" element_type="f16"/>
+			<output>
+				<port id="0" precision="FP16">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>120</dim>
+					<dim>160</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="2" name="main_level/agent/main/online/network_1/observation/truediv/reciprocal_531/copy_const" type="Const" version="opset1">
+			<data offset="2" size="2" shape="1,1,1,1" element_type="f16"/>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="3" name="main_level/agent/main/online/network_1/observation/truediv" type="Multiply" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>120</dim>
+					<dim>160</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>120</dim>
+					<dim>160</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="4" name="main_level/agent/main/online/network_1/observation/sub/neg_537/copy_const" type="Const" version="opset1">
+			<data offset="4" size="2" shape="1,1,1,1" element_type="f16"/>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="5" name="main_level/agent/main/online/network_1/observation/sub" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>120</dim>
+					<dim>160</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>120</dim>
+					<dim>160</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="6" name="main_level/agent/main/online/network_1/observation/Conv2d_0/kernel/read/Output_0/Data__const" type="Const" version="opset1">
+			<data offset="6" size="4096" shape="32,1,8,8" element_type="f16"/>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>32</dim>
+					<dim>1</dim>
+					<dim>8</dim>
+					<dim>8</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="7" name="main_level/agent/main/online/network_1/observation/Conv2d_0/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="valid" strides="4,4" dilations="1,1" pads_begin="0,0" pads_end="0,0" output_padding="0,0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>120</dim>
+					<dim>160</dim>
+				</port>
+				<port id="1">
+					<dim>32</dim>
+					<dim>1</dim>
+					<dim>8</dim>
+					<dim>8</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>29</dim>
+					<dim>39</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="8" name="main_level/agent/main/online/network_1/observation/Conv2d_0/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data offset="4102" size="64" shape="1,32,1,1" element_type="f16"/>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="9" name="main_level/agent/main/online/network_1/observation/Conv2d_0/BiasAdd/Add" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>29</dim>
+					<dim>39</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>29</dim>
+					<dim>39</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="10" name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_1_activation" type="ReLU" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>29</dim>
+					<dim>39</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>29</dim>
+					<dim>39</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="11" name="main_level/agent/main/online/network_1/observation/Conv2d_2/kernel/read/Output_0/Data__const" type="Const" version="opset1">
+			<data offset="4166" size="65536" shape="64,32,4,4" element_type="f16"/>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>64</dim>
+					<dim>32</dim>
+					<dim>4</dim>
+					<dim>4</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="12" name="main_level/agent/main/online/network_1/observation/Conv2d_2/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="valid" strides="2,2" dilations="1,1" pads_begin="0,0" pads_end="0,0" output_padding="0,0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>29</dim>
+					<dim>39</dim>
+				</port>
+				<port id="1">
+					<dim>64</dim>
+					<dim>32</dim>
+					<dim>4</dim>
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>13</dim>
+					<dim>18</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="13" name="main_level/agent/main/online/network_1/observation/Conv2d_2/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data offset="69702" size="128" shape="1,64,1,1" element_type="f16"/>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="14" name="main_level/agent/main/online/network_1/observation/Conv2d_2/BiasAdd/Add" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>13</dim>
+					<dim>18</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>13</dim>
+					<dim>18</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="15" name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_3_activation" type="ReLU" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>13</dim>
+					<dim>18</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>13</dim>
+					<dim>18</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="16" name="main_level/agent/main/online/network_1/observation/Conv2d_4/kernel/read/Output_0/Data__const" type="Const" version="opset1">
+			<data offset="69830" size="73728" shape="64,64,3,3" element_type="f16"/>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>64</dim>
+					<dim>64</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="17" name="main_level/agent/main/online/network_1/observation/Conv2d_4/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="valid" strides="1,1" dilations="1,1" pads_begin="0,0" pads_end="0,0" output_padding="0,0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>13</dim>
+					<dim>18</dim>
+				</port>
+				<port id="1">
+					<dim>64</dim>
+					<dim>64</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>11</dim>
+					<dim>16</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="18" name="main_level/agent/main/online/network_1/observation/Conv2d_4/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data offset="143558" size="128" shape="1,64,1,1" element_type="f16"/>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="19" name="main_level/agent/main/online/network_1/observation/Conv2d_4/BiasAdd/Add" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>11</dim>
+					<dim>16</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>11</dim>
+					<dim>16</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="20" name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_5_activation" type="ReLU" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>11</dim>
+					<dim>16</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>11</dim>
+					<dim>16</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="21" name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_5_activation/Transpose/Cast_11204_const" type="Const" version="opset1">
+			<data offset="143686" size="32" shape="4" element_type="i64"/>
+			<output>
+				<port id="1" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="22" name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_5_activation/Transpose" type="Transpose" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>11</dim>
+					<dim>16</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>11</dim>
+					<dim>16</dim>
+					<dim>64</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="23" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/kernel/read/MinusOne786_const" type="Const" version="opset1">
+			<data offset="143718" size="8" shape="1" element_type="i64"/>
+			<output>
+				<port id="1" precision="I64">
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="24" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/MatMul/1_port_transpose756_const" type="Const" version="opset1">
+			<data offset="143726" size="11534336" shape="512,11264" element_type="f16"/>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>512</dim>
+					<dim>11264</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="25" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/kernel/read/Shape" type="ShapeOf" version="opset3">
+			<data output_type="i64"/>
+			<input>
+				<port id="0">
+					<dim>512</dim>
+					<dim>11264</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="I64">
+					<dim>2</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="26" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/kernel/read/Shape/Gather/Cast_11208_const" type="Const" version="opset1">
+			<data offset="11678062" size="4" shape="1" element_type="i32"/>
+			<output>
+				<port id="1" precision="I32">
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="27" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/kernel/read/Shape/Gather/Cast_21210_const" type="Const" version="opset1">
+			<data offset="11678066" size="8" shape="" element_type="i64"/>
+			<output>
+				<port id="1" precision="I64"/>
+			</output>
+		</layer>
+		<layer id="28" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/kernel/read/Shape/Gather" type="Gather" version="opset1">
+			<input>
+				<port id="0">
+					<dim>2</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+				</port>
+				<port id="2"/>
+			</input>
+			<output>
+				<port id="3" precision="I64">
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="29" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/kernel/read/MinusOne/shapes_concat" type="Concat" version="opset1">
+			<data axis="0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="I64">
+					<dim>2</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="30" name="main_level/agent/main/online/network_1/observation/Flatten/flatten/Reshape" type="Reshape" version="opset1">
+			<data special_zero="True"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>11</dim>
+					<dim>16</dim>
+					<dim>64</dim>
+				</port>
+				<port id="1">
+					<dim>2</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>11264</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="31" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/MatMul" type="MatMul" version="opset1">
+			<data transpose_a="False" transpose_b="True"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>11264</dim>
+				</port>
+				<port id="1">
+					<dim>512</dim>
+					<dim>11264</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="32" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data offset="11678074" size="1024" shape="1,512" element_type="f16"/>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="33" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/BiasAdd/Add" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="34" name="main_level/agent/main/online/network_1/middleware_fc_embedder/BatchnormActivationDropout_1_activation" type="ReLU" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="35" name="main_level/agent/main/online/network_1/mul" type="Multiply" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="36" name="main_level/agent/main/online/network_1/gradients_from_head_0-0_rescalers/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data offset="11679098" size="2" shape="1,1" element_type="f16"/>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="37" name="main_level/agent/main/online/network_1/mul_1" type="Multiply" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="38" name="main_level/agent/main/online/network_1/add" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="39" name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/MatMul/1_port_transpose760_const" type="Const" version="opset1">
+			<data offset="11679100" size="15360" shape="15,512" element_type="f16"/>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>15</dim>
+					<dim>512</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="40" name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/MatMul" type="MatMul" version="opset1">
+			<data transpose_a="False" transpose_b="True"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+				</port>
+				<port id="1">
+					<dim>15</dim>
+					<dim>512</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>15</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="41" name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data offset="11694460" size="30" shape="1,15" element_type="f16"/>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>15</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="42" name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/BiasAdd/Add" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>15</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>15</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP16">
+					<dim>1</dim>
+					<dim>15</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="43" name="main_level/agent/main/online/network_1/ppo_head_0/policy" type="SoftMax" version="opset1">
+			<data axis="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>15</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>15</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="44" name="main_level/agent/main/online/network_1/ppo_head_0/policy/sink_port_0" type="Result" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>15</dim>
+				</port>
+			</input>
+		</layer>
+	</layers>
+	<edges>
+		<edge from-layer="1" from-port="0" to-layer="3" to-port="0"/>
+		<edge from-layer="2" from-port="1" to-layer="3" to-port="1"/>
+		<edge from-layer="3" from-port="2" to-layer="5" to-port="0"/>
+		<edge from-layer="4" from-port="1" to-layer="5" to-port="1"/>
+		<edge from-layer="5" from-port="2" to-layer="7" to-port="0"/>
+		<edge from-layer="6" from-port="1" to-layer="7" to-port="1"/>
+		<edge from-layer="7" from-port="2" to-layer="9" to-port="0"/>
+		<edge from-layer="8" from-port="1" to-layer="9" to-port="1"/>
+		<edge from-layer="9" from-port="2" to-layer="10" to-port="0"/>
+		<edge from-layer="10" from-port="1" to-layer="12" to-port="0"/>
+		<edge from-layer="11" from-port="1" to-layer="12" to-port="1"/>
+		<edge from-layer="12" from-port="2" to-layer="14" to-port="0"/>
+		<edge from-layer="13" from-port="1" to-layer="14" to-port="1"/>
+		<edge from-layer="14" from-port="2" to-layer="15" to-port="0"/>
+		<edge from-layer="15" from-port="1" to-layer="17" to-port="0"/>
+		<edge from-layer="16" from-port="1" to-layer="17" to-port="1"/>
+		<edge from-layer="17" from-port="2" to-layer="19" to-port="0"/>
+		<edge from-layer="18" from-port="1" to-layer="19" to-port="1"/>
+		<edge from-layer="19" from-port="2" to-layer="20" to-port="0"/>
+		<edge from-layer="20" from-port="1" to-layer="22" to-port="0"/>
+		<edge from-layer="21" from-port="1" to-layer="22" to-port="1"/>
+		<edge from-layer="24" from-port="1" to-layer="25" to-port="0"/>
+		<edge from-layer="25" from-port="1" to-layer="28" to-port="0"/>
+		<edge from-layer="26" from-port="1" to-layer="28" to-port="1"/>
+		<edge from-layer="27" from-port="1" to-layer="28" to-port="2"/>
+		<edge from-layer="23" from-port="1" to-layer="29" to-port="0"/>
+		<edge from-layer="28" from-port="3" to-layer="29" to-port="1"/>
+		<edge from-layer="22" from-port="2" to-layer="30" to-port="0"/>
+		<edge from-layer="29" from-port="2" to-layer="30" to-port="1"/>
+		<edge from-layer="30" from-port="2" to-layer="31" to-port="0"/>
+		<edge from-layer="24" from-port="1" to-layer="31" to-port="1"/>
+		<edge from-layer="31" from-port="2" to-layer="33" to-port="0"/>
+		<edge from-layer="32" from-port="1" to-layer="33" to-port="1"/>
+		<edge from-layer="33" from-port="2" to-layer="34" to-port="0"/>
+		<edge from-layer="0" from-port="1" to-layer="35" to-port="0"/>
+		<edge from-layer="34" from-port="1" to-layer="35" to-port="1"/>
+		<edge from-layer="36" from-port="1" to-layer="37" to-port="0"/>
+		<edge from-layer="34" from-port="1" to-layer="37" to-port="1"/>
+		<edge from-layer="35" from-port="2" to-layer="38" to-port="0"/>
+		<edge from-layer="37" from-port="2" to-layer="38" to-port="1"/>
+		<edge from-layer="38" from-port="2" to-layer="40" to-port="0"/>
+		<edge from-layer="39" from-port="1" to-layer="40" to-port="1"/>
+		<edge from-layer="40" from-port="2" to-layer="42" to-port="0"/>
+		<edge from-layer="41" from-port="1" to-layer="42" to-port="1"/>
+		<edge from-layer="42" from-port="2" to-layer="43" to-port="0"/>
+		<edge from-layer="43" from-port="1" to-layer="44" to-port="0"/>
+	</edges>
+	<meta_data>
+		<MO_version value="2021.1.0-1237-bece22ac675-releases/2021/1"/>
+		<cli_parameters>
+			<data_type value="FP16"/>
+			<disable_fusing value="True"/>
+			<disable_gfusing value="True"/>
+			<disable_nhwc_to_nchw value="False"/>
+			<disable_resnet_optimization value="False"/>
+			<disable_weights_compression value="False"/>
+			<enable_concat_optimization value="False"/>
+			<extensions value="DIR"/>
+			<framework value="tf"/>
+			<freeze_placeholder_with_value value="{}"/>
+			<generate_deprecated_IR_V7 value="False"/>
+			<input value="main_level/agent/main/online/network_0/observation/observation"/>
+			<input_model value="DIR/model.pb"/>
+			<input_model_is_text value="False"/>
+			<input_shape value="[1,120,160,1]"/>
+			<keep_shape_ops value="True"/>
+			<log_level value="ERROR"/>
+			<mean_scale_values value="{}"/>
+			<mean_values value="()"/>
+			<model_name value="Sample_single_cam/model"/>
+			<output_dir value="DIR"/>
+			<placeholder_data_types value="{}"/>
+			<placeholder_shapes value="{'main_level/agent/main/online/network_0/observation/observation': array([  1, 120, 160,   1])}"/>
+			<progress value="False"/>
+			<reverse_input_channels value="False"/>
+			<scale value="1.0"/>
+			<scale_values value="()"/>
+			<silent value="False"/>
+			<static_shape value="False"/>
+			<stream_output value="False"/>
+			<unset unset_cli_parameters="batch, finegrain_fusing, input_checkpoint, input_meta_graph, move_to_preprocess, output, saved_model_dir, saved_model_tags, tensorboard_logdir, tensorflow_custom_layer_libraries, tensorflow_custom_operations_config_update, tensorflow_object_detection_api_pipeline_config, tensorflow_use_custom_operations_config, transformations_config"/>
+		</cli_parameters>
+	</meta_data>
+</net>
