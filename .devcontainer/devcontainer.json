@@ -15,7 +15,7 @@
         "terminal.integrated.profiles.linux": {
             "bash (ROS)": {
               "path": "/bin/bash",
-              "args": ["--init-file", "./script/bashrc"]
+              "args": ["--init-file", ".devcontainer/bashrc"]
             }
           },
           "terminal.integrated.defaultProfile.linux": "bash (ROS)"
