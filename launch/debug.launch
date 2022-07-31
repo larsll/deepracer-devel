@@ -3,7 +3,7 @@
   <arg name="fps" default="15" />
   <node pkg="camera_pkg" namespace="camera_pkg" exec="camera_node" output="log">
       <param name="resize_images" type="bool" value="True" /> 
-      <param name="resize_images_factor" type="int" value="2" /> 
+      <param name="resize_images_factor" type="int" value="4" /> 
       <param name="display_topic_enable" type="bool" value="False" /> 
       <param name="fps" type="int" value="$(var fps)" />
       <param name="mask_images" type="float" value="-0.1" />
@@ -13,14 +13,6 @@
     <param name="bus_id" type="int" value="8" />
   </node>
   <node pkg="sensor_fusion_pkg" namespace="sensor_fusion_pkg" exec="sensor_fusion_node" output="log" />
-  <!--  <node pkg="incar_video_pkg" exec="incar_video_capture_node" output="log">
-      <param name="duplicate_frame" type="bool" value="False" />
-      <param name="fps" type="int" value="$(var fps)" />
-  </node> -->
-  <!-- <executable cmd="ros2 bag record /imu_msg/raw" output="screen" cwd="./output" />  -->
-  <node pkg="incar_video_pkg" exec="incar_video_edit_node" output="log">
-      <param name="racecar_name" type="str" value="Duckworth" /> 
-      <param name="output_file_name" type="str" value="$(var output)" />
-      <param name="fps" type="int" value="$(var fps)" />
-  </node>
+  <node pkg="inference_pkg" namespace="inference_pkg" exec="inference_node" output="log" />
+  <node pkg="deepracer_navigation_pkg" namespace="deepracer_navigation_pkg" exec="deepracer_navigation_node" output="log" />
 </launch>
