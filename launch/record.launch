@@ -3,7 +3,7 @@
   <arg name="fps" default="15" />
   <node pkg="camera_pkg" namespace="camera_pkg" exec="camera_node" output="log">
       <param name="resize_images" type="bool" value="True" /> 
-      <param name="resize_images_factor" type="int" value="1" /> 
+      <param name="resize_images_factor" type="int" value="2" /> 
       <param name="display_topic_enable" type="bool" value="False" /> 
       <param name="fps" type="int" value="$(var fps)" />
       <param name="mask_images" type="float" value="-0.1" />
