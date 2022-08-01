@@ -13,6 +13,8 @@
     <param name="bus_id" type="int" value="8" />
   </node>
   <node pkg="sensor_fusion_pkg" namespace="sensor_fusion_pkg" exec="sensor_fusion_node" output="log" />
-  <node pkg="inference_pkg" namespace="inference_pkg" exec="inference_node" output="log" />
+  <node pkg="inference_pkg" namespace="inference_pkg" exec="inference_node" output="log">
+    <param name="device" type="str" value="CPU" />
+  </node>
   <node pkg="deepracer_navigation_pkg" namespace="deepracer_navigation_pkg" exec="deepracer_navigation_node" output="log" />
 </launch>
