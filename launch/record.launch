@@ -9,8 +9,15 @@
       <param name="mask_images" type="float" value="-0.1" />
       <param name="mask_images_color" type="float" value="0.5" />
   </node>
-  <node pkg="imu_pkg" namespace="imu_pkg" exec="imu_node" output="log">
+  <node pkg="imu_pkg" namespace="imu" exec="imu_node" output="log">
     <param name="bus_id" type="int" value="8" />
+  </node>
+  <node pkg="imu_complementary_filter" exec="complementary_filter_gain_node" output="log">
+      <param name="do_bias_estimation" type="bool" value="True" />
+      <param name="do_adaptive_gain" type="bool" value="True" />
+      <param name="use_mag" type="bool" value="False" />
+      <param name="gain_acc" type="float" value="0.01" />
+      <param name="gain_mag" type="float" value="0.01" />
   </node>
   <node pkg="sensor_fusion_pkg" namespace="sensor_fusion_pkg" exec="sensor_fusion_node" output="log" />
   <node pkg="incar_video_pkg" namespace="incar_video_pkg" exec="incar_video_edit_node" output="log">
