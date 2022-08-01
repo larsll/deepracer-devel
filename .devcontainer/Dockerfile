@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-foxy-async-web-server-cpp \
     ros-foxy-vision-opencv \
     ros-foxy-image-transport \
+    ros-foxy-imu-tools \
     libjsoncpp-dev \
     v4l-utils \
     ffmpeg \
