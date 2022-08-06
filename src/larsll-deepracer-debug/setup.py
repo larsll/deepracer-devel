@@ -1,10 +1,10 @@
 from setuptools import setup
 
-package_name = 'larsll-deepracer-debug'
+package_name = 'debug_pkg'
 
 setup(
     name=package_name,
-    version='0.0.0',
+    version='0.0.1',
     packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -15,11 +15,12 @@ setup(
     zip_safe=True,
     maintainer='ludvigse',
     maintainer_email='larsll@outlook.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    description='Debugging tools for DeepRacer',
+    license='Apache 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'test = debug_pkg.debug_imu_node:main'
         ],
     },
 )
