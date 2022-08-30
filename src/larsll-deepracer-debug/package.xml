@@ -15,6 +15,7 @@
   <depend>imu_pkg</depend>
   <depend>tf_transformations</depend>
   <depend>transforms3d</depend>
+  <depend>imu_complementary_filter</depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
