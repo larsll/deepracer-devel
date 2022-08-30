@@ -1,0 +1,13 @@
+<launch >
+  <node pkg="imu_pkg" namespace="imu" exec="imu_node" output="log">
+    <param name="bus_id" type="int" value="8" />
+  </node>
+  <node pkg="imu_complementary_filter" exec="complementary_filter_node" output="log">
+      <param name="do_bias_estimation" type="bool" value="True" />
+      <param name="do_adaptive_gain" type="bool" value="True" />
+      <param name="use_mag" type="bool" value="False" />
+      <param name="gain_acc" type="float" value="0.01" />
+      <param name="gain_mag" type="float" value="0.01" />
+  </node>
+  <node pkg="debug_pkg" exec="imu" output="log" />
+</launch>
