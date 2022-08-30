@@ -79,4 +79,5 @@
         "valarray": "cpp",
         "variant": "cpp"
     },
+    "ros.distro": "foxy",
 }
