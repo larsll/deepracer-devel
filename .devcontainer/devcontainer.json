@@ -7,7 +7,7 @@
     },
     "containerUser": "${localEnv:USER}",
     "extensions": ["ms-python.python","ms-vscode.cpptools-extension-pack"],
-    "runArgs":["--device=/dev/video4","--device=/dev/i2c-8"],
+    "runArgs":["--privileged"],
     "mounts": [
         "source=deepracer-ros-bashhistory,target=/commandhistory,type=volume"
     ],

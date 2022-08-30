@@ -8,12 +8,12 @@ ARG USER_GID=$USER_UID
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libboost-all-dev \
-    python3-opencv \
     python3-pip \
     ros-foxy-async-web-server-cpp \
-    ros-foxy-vision-opencv \
     ros-foxy-image-transport \
     ros-foxy-imu-tools \
+    ros-foxy-tf-transformations \
+    ros-foxy-cv-bridge \
     libjsoncpp-dev \
     v4l-utils \
     ffmpeg \
@@ -27,10 +27,9 @@ RUN curl -o GPG-PUB-KEY-INTEL-OPENVINO-2021 https://apt.repos.intel.com/openvino
     echo "deb https://apt.repos.intel.com/openvino/2021 all main" | tee - a /etc/apt/sources.list.d/intel-openvino-2021.list && \
     apt-get update && apt-get install -y --no-install-recommends intel-openvino-dev-ubuntu20-"${build_id}" && \
     /opt/intel/openvino_"${build_id}"/deployment_tools/model_optimizer/install_prerequisites/install_prerequisites.sh tf && \
-    rm -rf /var/lib/apt/lists/* && \
     ln --symbolic /opt/intel/openvino_"${build_id}"/ /opt/intel/openvino
 
-RUN pip3 install -U smbus2 pillow
+RUN pip3 install -U smbus2 pillow transforms3d autopep8 opencv-python
 
 # Create the user
 RUN groupadd --gid $USER_GID $USERNAME \
