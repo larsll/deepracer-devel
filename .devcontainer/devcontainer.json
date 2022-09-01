@@ -7,7 +7,7 @@
     },
     "containerUser": "${localEnv:USER}",
     "extensions": ["ms-python.python","ms-vscode.cpptools-extension-pack"],
-    "runArgs":["--privileged"],
+    "runArgs":["--privileged","--network", "host"],
     "mounts": [
         "source=deepracer-ros-bashhistory,target=/commandhistory,type=volume"
     ],

@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip \
     ros-foxy-async-web-server-cpp \
     ros-foxy-image-transport \
+    ros-foxy-compressed-image-transport \
     ros-foxy-imu-tools \
     ros-foxy-tf-transformations \
     ros-foxy-cv-bridge \
