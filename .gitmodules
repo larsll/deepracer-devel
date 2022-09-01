@@ -1,30 +1,39 @@
 [submodule "src/aws-deepracer-camera-pkg"]
 	path = src/aws-deepracer-camera-pkg
-	url = https://github.com/aws-deepracer/aws-deepracer-camera-pkg
+	url = https://github.com/larsll/aws-deepracer-camera-pkg
+	branch = compressed-image
 [submodule "src/aws-deepracer-imu-pkg"]
 	path = src/aws-deepracer-imu-pkg
 	url = https://github.com/larsll/aws-deepracer-imu-pkg
+	branch = main
 [submodule "src/aws-deepracer-incar-video-pkg"]
 	path = src/aws-deepracer-incar-video-pkg
 	url = https://github.com/larsll/aws-deepracer-incar-video-pkg
+	branch = main
 [submodule "src/aws-deepracer-interfaces-pkg"]
 	path = src/aws-deepracer-interfaces-pkg
-	url = https://github.com/aws-deepracer/aws-deepracer-interfaces-pkg
+	url = https://github.com/larsll/aws-deepracer-interfaces-pkg
+	branch = dev
 [submodule "deps/BMI160-i2c"]
 	path = deps/BMI160-i2c
 	url = https://github.com/lefuturiste/BMI160-i2c.git
 [submodule "src/web_video_server"]
 	path = deps/web_video_server
 	url = https://github.com/RobotWebTools/web_video_server
+	branch = ros2
 [submodule "src/aws-deepracer-sensor-fusion-pkg"]
 	path = src/aws-deepracer-sensor-fusion-pkg
 	url = https://github.com/larsll/aws-deepracer-sensor-fusion-pkg/
+	branch = compressed-image	
 [submodule "src/aws-deepracer-inference-pkg"]
 	path = src/aws-deepracer-inference-pkg
-	url = https://github.com/aws-deepracer/aws-deepracer-inference-pkg
+	url = https://github.com/larsll/aws-deepracer-inference-pkg
+	branch = compressed-image
 [submodule "src/aws-deepracer-model-optimizer-pkg"]
 	path = src/aws-deepracer-model-optimizer-pkg
 	url = https://github.com/aws-deepracer/aws-deepracer-model-optimizer-pkg
+	branch = main
 [submodule "src/aws-deepracer-navigation-pkg"]
 	path = src/aws-deepracer-navigation-pkg
-	url = https://github.com/aws-deepracer/aws-deepracer-navigation-pkg
+	url = https://github.com/larsll/aws-deepracer-navigation-pkg
+	branch = dev
