@@ -3,12 +3,14 @@
     "python.autoComplete.extraPaths": [
         "/opt/ros/foxy/lib/python3.8/site-packages/",
         "./deps/BMI160-i2c",
-        "./install/deepracer_interfaces_pkg/lib/python3.8/site-packages"
+        "./install/deepracer_interfaces_pkg/lib/python3.8/site-packages",
+        "./install/incar_video_interfaces_pkg/lib/python3.8/site-packages"
     ],
     "python.analysis.extraPaths": [
         "/opt/ros/foxy/lib/python3.8/site-packages/",
         "./deps/BMI160-i2c",
-        "./install/deepracer_interfaces_pkg/lib/python3.8/site-packages"
+        "./install/deepracer_interfaces_pkg/lib/python3.8/site-packages",
+        "./install/incar_video_interfaces_pkg/lib/python3.8/site-packages"
     ],
     "files.associations": {
         "condition_variable": "cpp",
