@@ -4,7 +4,7 @@
   <node pkg="camera_pkg" namespace="camera_pkg" exec="camera_node" output="log">
       <param name="resize_images" type="bool" value="False" /> 
       <param name="resize_images_factor" type="int" value="2" /> 
-      <param name="display_topic_enable" type="bool" value="False" /> 
+      <param name="display_topic_enable" type="bool" value="True" /> 
       <param name="fps" type="int" value="$(var fps)" />
       <param name="mask_images" type="float" value="-0.1" />
       <param name="mask_images_color" type="float" value="0.5" />
@@ -19,7 +19,9 @@
       <param name="gain_acc" type="float" value="0.01" />
       <param name="gain_mag" type="float" value="0.01" />
   </node>
-  <node pkg="sensor_fusion_pkg" namespace="sensor_fusion_pkg" exec="sensor_fusion_node" output="log" />
+  <node pkg="sensor_fusion_pkg" namespace="sensor_fusion_pkg" exec="sensor_fusion_node" output="log">
+      <param name="image_transport" type="str" value="compressed" />
+  </node>
   <node pkg="incar_video_pkg" namespace="incar_video_pkg" exec="incar_video_edit_node" output="log">
       <param name="racecar_name" type="str" value="Duckworth" /> 
       <param name="output_file_name" type="str" value="$(var output)" />
