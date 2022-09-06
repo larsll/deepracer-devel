@@ -37,3 +37,6 @@
 	path = src/aws-deepracer-navigation-pkg
 	url = https://github.com/larsll/aws-deepracer-navigation-pkg
 	branch = dev
+[submodule "src/aws-deepracer-servo-pkg"]
+	path = src/aws-deepracer-servo-pkg
+	url = https://github.com/aws-deepracer/aws-deepracer-servo-pkg
