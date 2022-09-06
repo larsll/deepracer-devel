@@ -40,3 +40,4 @@
 [submodule "src/aws-deepracer-servo-pkg"]
 	path = src/aws-deepracer-servo-pkg
 	url = https://github.com/larsll/aws-deepracer-servo-pkg
+	branch = dev
