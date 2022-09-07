@@ -1,0 +1,4 @@
+KERNEL=="pwmchip0", SUBSYSTEM=="pwm", DRIVERS=="pca9685-pwm", ATTR{npwm}=="17", RUN+="/opt/aws/deepracer/util/pwm_permissions.sh %p"
+# KERNEL=="pwmchip0", SUBSYSTEM=="pwm", DRIVERS=="pca9685-pwm", ATTR{npwm}=="17", RUN+="/bin/bash -c 'echo 1 > /sys%p/export'"
+# KERNEL=="pwmchip0", SUBSYSTEM=="pwm", DRIVERS=="pca9685-pwm", ATTR{npwm}=="17", RUN+="/bin/chgrp -R i2c /sys%p"
+# KERNEL=="pwmchip0", SUBSYSTEM=="pwm", DRIVERS=="pca9685-pwm", ATTR{npwm}=="17", RUN+="/bin/bash -c '/bin/chmod g+w /sys%p/*/duty_cycle /sys%p/*/enable /sys%p/*/period /sys%p/*/polarity /sys%p/*/uevent'"
