@@ -1,0 +1,12 @@
+<launch >
+  <arg name="output" default="output/deepracer-{}.mp4" />
+  <arg name="fps" default="15" />
+  <node pkg="incar_video_pkg" namespace="incar_video_pkg" exec="incar_video_edit_node" output="log">
+      <param name="racecar_name" type="str" value="Duckworth" /> 
+      <param name="output_file_name" type="str" value="$(var output)" />
+      <param name="fps" type="int" value="$(var fps)" />
+      <param name="save_to_mp4" type="bool" value="True"  />
+      <param name="publish_stream" type="bool" value="True" />
+  </node>
+  <node pkg="web_video_server" exec="web_video_server" />
+</launch>
