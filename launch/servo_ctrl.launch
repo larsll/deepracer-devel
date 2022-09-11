@@ -1,0 +1,3 @@
+<launch >
+  <node pkg="servo_pkg" namespace="servo_pkg" exec="servo_node" output="log" />
+</launch>

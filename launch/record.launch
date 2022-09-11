@@ -1,6 +1,6 @@
 <launch >
   <arg name="output" default="output/deepracer-{}.mp4" />
-  <arg name="fps" default="25" />
+  <arg name="fps" default="15" />
   <node pkg="camera_pkg" namespace="camera_pkg" exec="camera_node" output="log">
       <param name="resize_images" type="bool" value="False" /> 
       <param name="resize_images_factor" type="int" value="2" /> 
@@ -10,7 +10,7 @@
       <param name="mask_images_color" type="float" value="0.5" />
   </node>
   <node pkg="imu_pkg" namespace="imu" exec="imu_node" output="log">
-    <param name="bus_id" type="int" value="8" />
+    <param name="bus_id" type="int" value="1" />
   </node>
   <node pkg="imu_complementary_filter" exec="complementary_filter_node" output="log">
       <param name="do_bias_estimation" type="bool" value="True" />
@@ -22,6 +22,7 @@
   <node pkg="sensor_fusion_pkg" namespace="sensor_fusion_pkg" exec="sensor_fusion_node" output="log">
       <param name="image_transport" type="str" value="compressed" />
   </node>
+  <node pkg="servo_pkg" namespace="servo_pkg" exec="servo_node" output="log" />
   <node pkg="incar_video_pkg" namespace="incar_video_pkg" exec="incar_video_edit_node" output="log">
       <param name="racecar_name" type="str" value="Duckworth" /> 
       <param name="output_file_name" type="str" value="$(var output)" />
