@@ -6,7 +6,7 @@
                 "${workspaceFolder}/**",
                 "/opt/ros/foxy/include/**",
                 "/usr/include/opencv4/",
-                "/opt/intel/openvino/inference_engine/**"
+                "/opt/intel/openvino_2021/inference_engine/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
