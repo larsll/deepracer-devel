@@ -20,13 +20,17 @@ The `imu_pkg` specifically depends on the following ROS 2 packages as build and 
 
 Additionally the following Python Packages are needed:
 
+1. `pyserial` is needed to allow starting and stopping of recording by serial input.
 1. `smbus2` which allows communication via the i2c bus.
-1. `BMI160-i2c` which is a driver for the Bosch BMI160 IMU. We need to build from source.
+1. `BMI160-i2c` which is a driver for the Bosch BMI160 IMU. It is included in `deps/` and will be built from source.
 
 The following access rights are needed if you want to run this as something else than root:
-1. `deepracer` to be member of groups `video` and `i2c`
+1. `deepracer` to be member of groups `video`, `i2c` and `dialout`.
+1. `misc/98-pwm.rules` to be copied to `/etc/udev/rules.d` and `misc/pwm_permissions.sh` to `/opt/aws/deepracer/util/`. (Car only.)
 
 ## Downloading and building
+
+### On the DeepRacer
 
 Open a terminal on the AWS DeepRacer device and run the following commands as the root user.
 
@@ -36,8 +40,19 @@ Open a terminal on the AWS DeepRacer device and run the following commands as th
 
 1. Install the required packages:
 
-        pip3 install smbus2
-        sudo apt-get install ros-foxy-sensor-msgs ros-foxy-geometry-msgs
+        pip3 install smbus2 pyserial
+        sudo apt-get install \
+                ros-foxy-sensor-msgs \
+                ros-foxy-geometry-msgs \
+                ros-foxy-async-web-server-cpp \
+                ros-foxy-image-transport \
+                ros-foxy-compressed-image-transport \
+                ros-foxy-imu-tools \
+                ros-foxy-tf-transformations \
+                ros-foxy-cv-bridge \
+                libjsoncpp-dev \
+                v4l-utils \
+                ffmpeg
 
 1. Source the ROS 2 Foxy setup bash script:
 
@@ -51,6 +66,13 @@ Open a terminal on the AWS DeepRacer device and run the following commands as th
 
         source install/local_setup.bash
 
+### On another computer
+
+The package contains a VS.Code Devcontainer configuration (`.devcontainer/`) which will build a docker container containing the required packages for developing. If the computer in question has a camera connected to `/dev/video?` then the `camera_pkg` will recognize, and use, it.
+
+*Limitations* 
+* IMU not available unless a BM160 is connected via USB/I2C.
+* LED not available unless a PCA9685 is connected via USB/I2C.
 
 ## Run the stack
 
@@ -76,21 +98,5 @@ To launch the built stack on the AWS DeepRacer device, open another terminal on 
 
 The `record.launch`, included in this package, provides an example demonstrating how to launch the full video recording stack independently from the DeepRacer application.
 
-        <launch >
-        <arg name="output" default="output/deepracer-{}.mp4" />
-        <node pkg="camera_pkg" exec="camera_node" output="log">
-            <param name="downscale_images" type="int" value="2" /> 
-            <param name="display_topic_enable" type="bool" value="False" /> 
-        </node>
-        <node pkg="imu_pkg" exec="imu_node" output="log" />
-        <node pkg="incar_video_pkg" exec="incar_video_capture_node" output="log">
-            <param name="duplicate_frame" type="bool" value="True" /> 
-        </node>
-        <executable cmd="ros2 bag record /imu_msg/raw" output="screen" cwd="./output" />
-        <node pkg="incar_video_pkg" exec="incar_video_edit_node" output="log">
-            <param name="racecar_name" type="string" value="Duckworth" /> 
-            <param name="output_file_name" type="string" value="$(var output)" />
-        </node>
-        </launch>
-
+There are other sample launch files in the `launch/` directory.
 
