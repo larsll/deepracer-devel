@@ -33,8 +33,9 @@ class DebugImuNode(Node):
         header: Header = data.header
         orientation: Quaternion = data.orientation
 
-        euler = euler_from_quaternion([orientation.w, orientation.x, orientation.y, orientation.z])
-        self.get_logger().info(str(euler))
+        euler = euler_from_quaternion([orientation.x, orientation.y, orientation.z, orientation.w], axes='rzyx')
+        self.get_logger().info("{:.2f} {:.2f} {:.2f}".format(euler[0], euler[1], euler[2]))
+
 
 def main(args=None):
     try:
