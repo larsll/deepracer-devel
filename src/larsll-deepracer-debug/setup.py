@@ -13,7 +13,7 @@ setup(
         ('share/' + package_name, ['package.xml']),
         (os.path.join("share", package_name), ["launch/debug_pkg_launch.py"]),
     ],
-    install_requires=['setuptools'],
+    install_requires=['setuptools', 'transforms3d'],
     zip_safe=True,
     maintainer='ludvigse',
     maintainer_email='larsll@outlook.com',
