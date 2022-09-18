@@ -8,7 +8,7 @@ from rclpy.callback_groups import ReentrantCallbackGroup
 
 from sensor_msgs.msg import Imu
 from std_msgs.msg import Header
-from geometry_msgs.msg import (Quaternion, Vector3, AccelWithCovarianceStamped)
+from geometry_msgs.msg import (Quaternion, AccelWithCovarianceStamped)
 from nav_msgs.msg import Odometry
 from tf_transformations import euler_from_quaternion
 
@@ -79,10 +79,10 @@ class DebugImuNode(Node):
         if (self.msg % 10 == 0):
             euler = euler_from_quaternion([orientation.x, orientation.y, orientation.z, orientation.w], axes='rzyx')
             self.get_logger().info("{:.2f} {:.2f} {:.2f} {:+.0f} {:+.0f} {:+.0f}".format(self.velocity,
-                                                                            self.accl_min, self.accl_max,
-                                                                           euler[0] * 180 / math.pi,
-                                                                           euler[1] * 180 / math.pi,
-                                                                           euler[2] * 180 / math.pi))
+                                                                                         self.accl_min, self.accl_max,
+                                                                                         euler[0] * 180 / math.pi,
+                                                                                         euler[1] * 180 / math.pi,
+                                                                                         euler[2] * 180 / math.pi))
 
     def _receive_accel(self, data: AccelWithCovarianceStamped):
 
@@ -112,7 +112,8 @@ class DebugImuNode(Node):
 
         self.msg += 1
 
-        speed: float = (data.twist.twist.linear.x ** 2 + data.twist.twist.linear.y ** 2 + data.twist.twist.linear.z ** 2) ** 0.5
+        speed: float = (data.twist.twist.linear.x ** 2 + data.twist.twist.linear.y **
+                        2 + data.twist.twist.linear.z ** 2) ** 0.5
 
         if (self.msg % 5 == 0):
             self.get_logger().info("{:.3f}".format(speed))
@@ -129,7 +130,7 @@ def main(args=None):
         # when the garbage collector destroys the node object)
         dbg_imu_node.destroy_node()
     except KeyboardInterrupt:
-        pass    
+        pass
     rclpy.shutdown()
 
 
