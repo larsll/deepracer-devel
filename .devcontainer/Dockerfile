@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-foxy-imu-tools \
     ros-foxy-tf-transformations \
     ros-foxy-cv-bridge \
+    ros-foxy-robot-localization \    
     ros-foxy-rqt-console \
     ros-foxy-rqt-graph \
     libjsoncpp-dev \
