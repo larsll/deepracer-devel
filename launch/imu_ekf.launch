@@ -1,15 +1,16 @@
 <launch >
   <node pkg="imu_pkg" namespace="imu" exec="imu_node" output="log">
     <param name="bus_id" type="int" value="1" />
-    <param name="publish_rate" type="int" value="100" />
+    <param name="publish_rate" type="int" value="25" />
     <param name="zero_motion_odometer" type="bool" value="False" />
   </node>
   <node pkg="imu_filter_madgwick" exec="imu_filter_madgwick_node" output="log">
       <param name="use_mag" type="bool" value="False" />
-      <param name="gain" type="float" value="0.9" />
+      <param name="gain" type="float" value="1.0" />
       <param name="remove_gravity_vector" type="bool" value="True" />
       <param name="world_frame" type="str" value="enu" />      
       <param name="publish_debug_topics" type="bool" value="False" />      
   </node>
+  <node pkg="robot_localization" exec="ekf_node" name="ekf_filter_node" output="log" args="--ros-args --params-file /home/deepracer/deepracer-video/misc/ekf.yaml" />
   <node pkg="debug_pkg" exec="imu" output="log" />
 </launch>
