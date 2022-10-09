@@ -31,7 +31,8 @@
       <param name="output_file_name" type="str" value="$(var output)" />
       <param name="fps" type="int" value="$(var fps)" />
       <param name="save_to_mp4" type="bool" value="True"  />
-      <param name="publish_stream" type="bool" value="True" />
+      <param name="publish_stream" type="bool" value="False" />
+      <param name="enable_overlay" type="bool" value="False" />
   </node>
   <node pkg="incar_video_pkg" namespace="incar_video_pkg" exec="incar_video_auto_ctrl_node" output="log" />
 </launch>
