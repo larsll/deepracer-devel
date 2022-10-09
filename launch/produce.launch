@@ -11,6 +11,8 @@
   </node>
   <node pkg="imu_pkg" namespace="imu" exec="imu_node" output="log">
     <param name="bus_id" type="int" value="1" />
+    <param name="publish_rate" type="int" value="25" />
+    <param name="zero_motion_odometer" type="bool" value="False" />    
   </node>
   <node pkg="imu_complementary_filter" exec="complementary_filter_node" output="log">
       <param name="do_bias_estimation" type="bool" value="True" />
