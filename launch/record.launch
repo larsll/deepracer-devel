@@ -30,7 +30,7 @@
       <param name="save_to_mp4" type="bool" value="True"  />
       <param name="publish_stream" type="bool" value="True" />
   </node>
-  <node pkg="incar_video_pkg" namespace="incar_video_pkg" exec="incar_video_ctrl_node" output="log">
+  <node pkg="incar_video_pkg" namespace="incar_video_pkg" exec="incar_video_serial_ctrl_node" output="log">
       <param name="serial_port" type="str" value="/dev/ttyACM0" />
   </node> 
   <node pkg="web_video_server" exec="web_video_server" />
