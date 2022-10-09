@@ -1,5 +1,5 @@
 <launch >
-  <arg name="fps" default="30" />
+  <arg name="fps" default="15" />
   <node pkg="camera_pkg" namespace="camera_pkg" exec="camera_node" output="log">
       <param name="resize_images" type="bool" value="False" /> 
       <param name="display_topic_enable" type="bool" value="True" /> 
