@@ -1,5 +1,5 @@
 <launch >
-  <arg name="output" default="output/deepracer-{}.mp4" />
+  <arg name="output" default="/media/deepracer/deepracer-{}.mp4" />
   <arg name="fps" default="15" />
   <node pkg="camera_pkg" namespace="camera_pkg" exec="camera_node" output="log">
       <param name="resize_images" type="bool" value="False" /> 
@@ -12,12 +12,12 @@
   <node pkg="imu_pkg" namespace="imu" exec="imu_node" output="log">
     <param name="bus_id" type="int" value="1" />
   </node>
-  <node pkg="imu_complementary_filter" exec="complementary_filter_node" output="log">
-      <param name="do_bias_estimation" type="bool" value="True" />
-      <param name="do_adaptive_gain" type="bool" value="True" />
+  <node pkg="imu_filter_madgwick" exec="imu_filter_madgwick_node" output="log">
       <param name="use_mag" type="bool" value="False" />
-      <param name="gain_acc" type="float" value="0.01" />
-      <param name="gain_mag" type="float" value="0.01" />
+      <param name="gain" type="float" value="0.9" />
+      <param name="remove_gravity_vector" type="bool" value="True" />
+      <param name="world_frame" type="str" value="enu" />
+      <param name="publish_debug_topics" type="bool" value="False" />
   </node>
   <node pkg="sensor_fusion_pkg" namespace="sensor_fusion_pkg" exec="sensor_fusion_node" output="log">
       <param name="image_transport" type="str" value="compressed" />
@@ -28,7 +28,8 @@
       <param name="output_file_name" type="str" value="$(var output)" />
       <param name="fps" type="int" value="$(var fps)" />
       <param name="save_to_mp4" type="bool" value="True"  />
-      <param name="publish_stream" type="bool" value="True" />
+      <param name="publish_stream" type="bool" value="False" />
+      <param name="enable_overlay" type="bool" value="False" />
   </node>
   <node pkg="incar_video_pkg" namespace="incar_video_pkg" exec="incar_video_serial_ctrl_node" output="log">
       <param name="serial_port" type="str" value="/dev/ttyACM0" />

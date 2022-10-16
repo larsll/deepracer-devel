@@ -94,5 +94,13 @@
         "--max-line-length",
         "120",
         "--experimental"
-]
+    ],
+    "files.exclude": {
+        "**/install": true,
+        "**/build": true
+    },
+    "search.exclude": {
+      "**/install": true,
+      "**/build": true
+    },
 }
