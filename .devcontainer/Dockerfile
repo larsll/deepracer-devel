@@ -18,6 +18,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-foxy-robot-localization \    
     ros-foxy-rqt-console \
     ros-foxy-rqt-graph \
+    ros-foxy-pybind11-vendor \
+    ros-foxy-test-msgs \
     libjsoncpp-dev \
     v4l-utils \
     ffmpeg \
