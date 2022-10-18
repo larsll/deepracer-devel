@@ -22,7 +22,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'imu = debug_pkg.debug_imu_node:main'
+            'imu = debug_pkg.debug_imu_node:main',
+            'bag_log_node = debug_pkg.bag_log_node:main'
         ],
     },
 )
