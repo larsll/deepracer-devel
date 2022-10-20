@@ -20,7 +20,7 @@ def get_rosbag_options(path, serialization_format='cdr'):
 
 
 def main():
-    bag_path = 'output/deepracer-bag-20221018-193919'
+    bag_path = 'output/deepracer-bag-20221020-200521'
     storage_options, converter_options = get_rosbag_options(bag_path)
 
     reader = rosbag2_py.SequentialReader()
@@ -38,7 +38,7 @@ def main():
 
         cv_img = bridge.compressed_imgmsg_to_cv2(msg.images[0], desired_encoding="passthrough")
 
-        cv2.imwrite("test/%06i.jpg" % count, cv_img)
+        cv2.imwrite("output/test/%06i.jpg" % count, cv_img)
         print("Writing image %i" % count)
         count += 1
 
