@@ -36,7 +36,7 @@ RUN curl -o GPG-PUB-KEY-INTEL-OPENVINO-2021 https://apt.repos.intel.com/openvino
     /opt/intel/openvino_"${build_id}"/deployment_tools/model_optimizer/install_prerequisites/install_prerequisites.sh tf && \
     ln --symbolic /opt/intel/openvino_"${build_id}"/ /opt/intel/openvino
 
-RUN pip3 install -U smbus2 pillow transforms3d autopep8 opencv-python pyserial
+RUN pip3 install -U smbus2 pillow transforms3d autopep8 opencv-python pyserial rosbags
 
 # Create the user
 RUN groupadd --gid $USER_GID $USERNAME \
