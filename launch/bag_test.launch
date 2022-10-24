@@ -7,8 +7,6 @@
   </node>
   <node pkg="logging_pkg" namespace="logging_pkg" exec="bag_log_node" output="log">
       <param name="monitor_topic" type="str" value="/camera_pkg/video_mjpeg" />
-      <param name="monitor_topic_type" type="str" value="deepracer_interfaces_pkg/msg/CameraMsg" />
       <param name="output_path" type="str" value="./output/deepracer-bag-{}" />
   </node>
-
 </launch>
