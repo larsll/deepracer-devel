@@ -13,7 +13,7 @@ setup(
         ('share/' + package_name, ['package.xml']),
         (os.path.join("share", package_name), ["launch/debug_pkg_launch.py"]),
     ],
-    install_requires=['setuptools', 'transforms3d'],
+    install_requires=['setuptools', 'transforms3d', 'rosbags'],
     zip_safe=True,
     maintainer='ludvigse',
     maintainer_email='larsll@outlook.com',
@@ -23,7 +23,7 @@ setup(
     entry_points={
         'console_scripts': [
             'imu = debug_pkg.debug_imu_node:main',
-            'bag_log_node = debug_pkg.bag_log_node:main'
+            'camera_replay_node = debug_pkg.camera_replay_node:main'
         ],
     },
 )

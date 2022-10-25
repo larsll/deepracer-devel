@@ -23,10 +23,19 @@ LED_MAX_VALUE = 10000000
 
 
 class RecordingState(IntEnum):
-    """ Color to RGB mapping
+    """ Status of Recording
     Extends:
         Enum
     """
     Stopped = 0
     Running = 1
     Stopping = 2
+
+
+class PlaybackState(IntEnum):
+    """ Status of Playback
+    Extends:
+        Enum
+    """
+    Stopped = 0
+    Running = 1
