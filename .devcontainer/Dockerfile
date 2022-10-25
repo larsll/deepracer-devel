@@ -56,4 +56,6 @@ RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhisto
     && chown -R $USERNAME /commandhistory \
     && echo $SNIPPET >> "/home/$USERNAME/.bashrc"
 
+RUN mkdir -p /opt/aws/deepracer && ln -sf /workspaces/deepracer-video/sample-models /opt/aws/deepracer/artifacts
+
 ENTRYPOINT ["/bin/bash", "source /opt/ros/foxy/setup.bash"]
