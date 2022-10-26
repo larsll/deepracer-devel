@@ -4,6 +4,10 @@ if [[ -f "$HOME/.bashrc" ]]; then
     source $HOME/.bashrc
 fi
 
+mkdir -p ~/.icons
+ln -sfT /usr/share/icons/Tango ~/.icons/hicolor
+export XDG_RUNTIME_DIR=/tmp/runtime-$(whoami)
+
 source /opt/ros/foxy/setup.bash
 source /opt/intel/openvino/bin/setupvars.sh
 

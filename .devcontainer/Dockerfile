@@ -17,8 +17,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-reco
     ros-foxy-tf-transformations \
     ros-foxy-cv-bridge \
     ros-foxy-robot-localization \    
-    ros-foxy-rqt-console \
-    ros-foxy-rqt-graph \
+    ros-foxy-rqt-common-plugins \
     ros-foxy-pybind11-vendor \
     ros-foxy-test-msgs \
     libjsoncpp-dev \
