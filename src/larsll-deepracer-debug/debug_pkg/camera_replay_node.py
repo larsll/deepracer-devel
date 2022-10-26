@@ -6,6 +6,8 @@ import sys
 import cv2
 from cv_bridge import CvBridge
 
+import numpy as np
+
 import rclpy
 from rclpy.node import Node
 from rclpy.executors import MultiThreadedExecutor
@@ -38,6 +40,7 @@ class CameraReplayNode(Node):
     _play_state = PlaybackState.Stopped
     _play_messages_generator = None
     _playback_frames = 0
+    _prev_img = None
 
     def __init__(self):
         super().__init__('camera_replay_node')
@@ -50,12 +53,15 @@ class CameraReplayNode(Node):
             type=ParameterType.PARAMETER_INTEGER))
         self.declare_parameter('display_topic_enable', True, ParameterDescriptor(
             type=ParameterType.PARAMETER_BOOL))
+        self.declare_parameter('blur_image', False, ParameterDescriptor(
+            type=ParameterType.PARAMETER_BOOL))
         self.declare_parameter('input_file', "", ParameterDescriptor(
             type=ParameterType.PARAMETER_STRING))
 
         self._resize_images = self.get_parameter('resize_images').value
         self._resize_images_factor = self.get_parameter('resize_images_factor').value
         self._display_topic_enable = self.get_parameter('display_topic_enable').value
+        self._blur_image = self.get_parameter('blur_image').value
         self._fps = self.get_parameter('fps').value
         self._input_file = self.get_parameter('input_file').value
 
@@ -134,14 +140,22 @@ class CameraReplayNode(Node):
         try:
             connection, timestamp, rawdata = next(self._play_messages_generator)
             msg: ROSImg = deserialize_cdr(ros1_to_cdr(rawdata, connection.msgtype), connection.msgtype)
-            img_cv2 = self._bridge.imgmsg_to_cv2(msg, "rgb8")
-            img_cv2 = cv2.cvtColor(img_cv2, cv2.COLOR_RGB2BGR)
+            img_in = self._bridge.imgmsg_to_cv2(msg, "rgb8")
+            img_in = cv2.cvtColor(img_in, cv2.COLOR_RGB2BGR)
+
+            if self._blur_image and self._prev_img is not None:
+                alpha = 0.6
+                beta = (1.0 - alpha)
+                img_out = cv2.addWeighted(img_in, alpha, self._prev_img, beta, 0.0)
+                img_out = cv2.blur(img_out, (15, 15))
+            else:
+                img_out = img_in
 
             if (self._resize_images):
-                img_cv2 = cv2.resize(img_cv2, dsize=(int(DEFAULT_IMAGE_WIDTH / self._resize_images_factor),
+                img_out = cv2.resize(img_out, dsize=(int(DEFAULT_IMAGE_WIDTH / self._resize_images_factor),
                                      int(DEFAULT_IMAGE_HEIGHT / self._resize_images_factor)))
 
-            c_msg = self._bridge.cv2_to_compressed_imgmsg(img_cv2)
+            c_msg = self._bridge.cv2_to_compressed_imgmsg(img_out)
             c_msg.format = "bgr8; jpeg compressed bgr8"
 
             camera_msg: CameraMsg = CameraMsg()
@@ -149,10 +163,11 @@ class CameraReplayNode(Node):
 
             self._camera_pub.publish(camera_msg)
             if self._display_topic_enable:
-                self._display_pub.publish(self._bridge.cv2_to_imgmsg(img_cv2, "bgr8"))
+                self._display_pub.publish(self._bridge.cv2_to_imgmsg(img_out, "bgr8"))
                 self._display_cpub.publish(c_msg)
 
             self._playback_frames += 1
+            self._prev_img = img_in
 
         except StopIteration:
             self.get_logger().info("End of stream after {} messages.".format(self._playback_frames))

@@ -2,8 +2,9 @@
   <arg name="fps" default="15" />
   <node pkg="debug_pkg" namespace="camera_pkg" exec="camera_replay_node" output="log">
       <param name="resize_images" type="bool" value="True" /> 
-      <param name="resize_images_factor" type="int" value="2" />       
+      <param name="resize_images_factor" type="int" value="4" />       
       <param name="display_topic_enable" type="bool" value="True" /> 
+      <param name="blur_image" type="bool" value="True" />       
       <param name="fps" type="int" value="$(var fps)" />
       <param name="input_file" type="str" value="output/2022-10-23-17-42-19.bag" />      
   </node>
