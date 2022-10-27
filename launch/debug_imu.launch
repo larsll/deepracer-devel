@@ -26,7 +26,7 @@
     <param name="device" type="str" value="CPU" />
   </node>
   <node pkg="deepracer_navigation_pkg" namespace="deepracer_navigation_pkg" exec="deepracer_navigation_node" output="log" />
-  <node pkg="incar_video_pkg" namespace="incar_video_pkg" exec="incar_video_edit_node" output="log">
+  <node pkg="incar_video_pkg" namespace="incar_video_pkg" exec="incar_video_exec" output="log">
       <param name="racecar_name" type="str" value="Duckworth" /> 
       <param name="output_file_name" type="str" value="$(var output)" />
       <param name="fps" type="int" value="$(var fps)" />
