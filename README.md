@@ -1,8 +1,17 @@
-# DeepRacer Video Recording - ROS2 Workspace
+# DeepRacer Development - ROS2 Workspace
 
 ## Overview
 
-This is a utility repository used to combine all the parts needed to set up a working workspace to take onboard video from the AWS DeepRacer that is running ROS2 and Ubuntu 20.04.
+This is a utility repository used to combine all the parts needed to set up a working workspace to develop additional nodes for the AWS DeepRacer that is running ROS2 and Ubuntu 20.04.
+
+## Features
+
+There is a set of different nodes being pulled in as submodules, and the `launch/` directory contains different launch files that combine different combinations of nodes to test out different functionalities.
+
+Some key features:
+* Use of onboard IMU sensor
+* Creation of video stream and file based on on-car video and IMU
+* Image compression end-to-end.
 
 ## License
 
@@ -93,10 +102,4 @@ To launch the built stack on the AWS DeepRacer device, open another terminal on 
 1. Launch the stack using the launch script:
 
         ros2 launch record.launch 
-
-## Launch files
-
-The `record.launch`, included in this package, provides an example demonstrating how to launch the full video recording stack independently from the DeepRacer application.
-
-There are other sample launch files in the `launch/` directory.
 
