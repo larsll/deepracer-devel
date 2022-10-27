@@ -2,13 +2,13 @@
 	path = src/aws-deepracer-camera-pkg
 	url = https://github.com/larsll/aws-deepracer-camera-pkg
 	branch = compressed-image
-[submodule "src/aws-deepracer-imu-pkg"]
-	path = src/aws-deepracer-imu-pkg
-	url = https://github.com/larsll/aws-deepracer-imu-pkg
+[submodule "src/larsll-deepracer-imu-pkg"]
+	path = src/larsll-deepracer-imu-pkg
+	url = https://github.com/larsll/larsll-deepracer-imu-pkg
 	branch = main
-[submodule "src/aws-deepracer-incar-video-pkg"]
-	path = src/aws-deepracer-incar-video-pkg
-	url = https://github.com/larsll/aws-deepracer-incar-video-pkg
+[submodule "src/larsll-deepracer-incar-video-pkg"]
+	path = src/larsll-deepracer-incar-video-pkg
+	url = https://github.com/larsll/larsll-deepracer-incar-video-pkg
 	branch = main
 [submodule "src/aws-deepracer-interfaces-pkg"]
 	path = src/aws-deepracer-interfaces-pkg
