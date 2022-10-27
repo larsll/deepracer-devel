@@ -13,7 +13,7 @@
 [submodule "src/aws-deepracer-interfaces-pkg"]
 	path = src/aws-deepracer-interfaces-pkg
 	url = https://github.com/larsll/aws-deepracer-interfaces-pkg
-	branch = dev
+	branch = compressed-image
 [submodule "deps/BMI160-i2c"]
 	path = deps/BMI160-i2c
 	url = https://github.com/larsll/BMI160-i2c.git
