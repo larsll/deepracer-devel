@@ -2,11 +2,12 @@
   <arg name="fps" default="15" />
   <node pkg="camera_pkg" namespace="camera_pkg" exec="camera_node" output="log">
       <param name="resize_images" type="bool" value="True" /> 
-      <param name="display_topic_enable" type="bool" value="False" /> 
+      <param name="display_topic_enable" type="bool" value="True" /> 
       <param name="fps" type="int" value="$(var fps)" />
   </node>
   <node pkg="logging_pkg" namespace="logging_pkg" exec="bag_log_node" output="log">
       <param name="monitor_topic" type="str" value="/camera_pkg/video_mjpeg" />
+      <param name="log_topics" value="/camera_pkg/video_mjpeg,/camera_pkg/display_mjpeg" value-sep="," />
       <param name="output_path" type="str" value="./output/deepracer-bag-{}" />
   </node>
 </launch>
