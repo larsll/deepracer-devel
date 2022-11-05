@@ -48,3 +48,6 @@
 [submodule "src/larsll-deepracer-logging"]
 	path = src/larsll-deepracer-logging
 	url = https://github.com/larsll/larsll-deepracer-logging.git
+[submodule "deps/rosbag2_storage_mcap"]
+	path = deps/rosbag2_storage_mcap
+	url = https://github.com/ros-tooling/rosbag2_storage_mcap
