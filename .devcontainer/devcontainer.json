@@ -10,7 +10,7 @@
         "DISPLAY": "${localEnv:DISPLAY}",
         "QT_X11_NO_MITSHM": "1"
     },
-    "extensions": ["ms-python.python","ms-vscode.cpptools-extension-pack"],
+    "extensions": ["ms-python.python","ms-vscode.cpptools-extension-pack", "ms-toolsai.jupyter", "ms-iot.vscode-ros"],
     "runArgs":["--privileged","--network", "host"],
     "mounts": [
         "source=deepracer-ros-bashhistory,target=/commandhistory,type=volume",

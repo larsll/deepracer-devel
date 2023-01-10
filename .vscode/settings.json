@@ -14,6 +14,7 @@
         "./install/deepracer_interfaces_pkg/lib/python3.8/site-packages",
         "./install/incar_video_interfaces_pkg/lib/python3.8/site-packages"
     ],
+    "python.envFile": "${workspaceFolder}/.vscode/pythonenv",    
     "files.associations": {
         "condition_variable": "cpp",
         "thread": "cpp",
