@@ -48,3 +48,7 @@
 [submodule "src/larsll-deepracer-logging"]
 	path = src/larsll-deepracer-logging
 	url = https://github.com/larsll/larsll-deepracer-logging.git
+[submodule "deps/deepracer-viz"]
+	path = deps/deepracer-viz
+	url = https://github.com/jochem725/deepracer-viz
+	branch = v2

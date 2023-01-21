@@ -8,7 +8,8 @@
     "containerUser": "${localEnv:USER}",
     "containerEnv": {
         "DISPLAY": "${localEnv:DISPLAY}",
-        "QT_X11_NO_MITSHM": "1"
+        "QT_X11_NO_MITSHM": "1",
+        "COLCON_HOME": "/workspaces/deepracer-devel"
     },
     "extensions": ["ms-python.python","ms-vscode.cpptools-extension-pack", "ms-toolsai.jupyter", "ms-iot.vscode-ros"],
     "runArgs":["--privileged","--network", "host"],
