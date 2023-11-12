@@ -35,7 +35,7 @@ RUN curl -o GPG-PUB-KEY-INTEL-SW-PRODUCTS https://apt.repos.intel.com/intel-gpg-
     /opt/intel/openvino_"${build_id}"/deployment_tools/model_optimizer/install_prerequisites/install_prerequisites.sh tf && \
     ln --symbolic /opt/intel/openvino_"${build_id}"/ /opt/intel/openvino
 
-RUN pip3 install -U smbus2 pillow transforms3d autopep8 opencv-python pyserial rosbags pandas tensorflow nbconvert ipykernel numpy
+RUN pip3 install -U smbus2 pillow transforms3d autopep8 opencv-python pyserial rosbags "protobuf<3.21" "pandas<1.5" "tensorflow<2.5" "tensorboard<2.5" nbconvert ipykernel "numpy~=1.19.2"
 
 # Create the user
 RUN groupadd --gid $USER_GID $USERNAME \
@@ -55,6 +55,6 @@ RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhisto
     && chown -R $USERNAME /commandhistory \
     && echo $SNIPPET >> "/home/$USERNAME/.bashrc"
 
-RUN mkdir -p /opt/aws/deepracer && ln -sf /workspaces/deepracer-video/sample-models /opt/aws/deepracer/artifacts
+RUN mkdir -p /opt/aws/deepracer && ln -sf /workspaces/deepracer-devel/sample-models /opt/aws/deepracer/artifacts
 
 ENTRYPOINT ["/bin/bash", "source /opt/ros/foxy/setup.bash"]
