@@ -11,19 +11,23 @@
         "QT_X11_NO_MITSHM": "1",
         "COLCON_HOME": "/workspaces/deepracer-devel"
     },
-    "extensions": ["ms-python.python","ms-vscode.cpptools-extension-pack", "ms-toolsai.jupyter", "ms-iot.vscode-ros"],
+    "customizations": {
+        "vscode": {
+            "extensions": ["ms-python.python","ms-vscode.cpptools-extension-pack", "ms-toolsai.jupyter", "ms-iot.vscode-ros", "ms-python.pylint", "ms-python.autopep8"],
+            "settings": {
+                "terminal.integrated.profiles.linux": {
+                    "bash (ROS)": {
+                      "path": "/bin/bash",
+                      "args": ["--init-file", ".devcontainer/bashrc"]
+                    }
+                  },
+                  "terminal.integrated.defaultProfile.linux": "bash (ROS)"
+            }
+        }
+    },
     "runArgs":["--privileged","--network", "host"],
     "mounts": [
         "source=deepracer-ros-bashhistory,target=/commandhistory,type=volume",
         "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind"
-    ],
-    "settings": {
-        "terminal.integrated.profiles.linux": {
-            "bash (ROS)": {
-              "path": "/bin/bash",
-              "args": ["--init-file", ".devcontainer/bashrc"]
-            }
-          },
-          "terminal.integrated.defaultProfile.linux": "bash (ROS)"
-    }
+    ]
 }
