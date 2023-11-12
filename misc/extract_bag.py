@@ -6,7 +6,7 @@ import os
 
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
-from deepracer_interfaces_pkg.msg import CameraMsg
+from deepracer_interfaces_pkg.msg import CameraMsg, InferResultsArray
 from rclpy.serialization import deserialize_message
 
 
@@ -21,13 +21,13 @@ def get_rosbag_options(path, serialization_format='cdr'):
 
 
 def main():
-    bag_path = 'output/deepracer-bag-20221102-202649'
+    bag_path = '/workspaces/deepracer-devel/output/reinvent_logs/deepracer-bag-20221201-150502'
     storage_options, converter_options = get_rosbag_options(bag_path)
 
     reader = rosbag2_py.SequentialReader()
     reader.open(storage_options, converter_options)
 
-    storage_filter = rosbag2_py.StorageFilter(topics=['/camera_pkg/video_mjpeg'])
+    storage_filter = rosbag2_py.StorageFilter(topics=['/inference_pkg/rl_results'])
     reader.set_filter(storage_filter)
 
     bridge = CvBridge()
@@ -35,16 +35,18 @@ def main():
     count = 0
     while reader.has_next():
         (topic, data, t) = reader.read_next()
-        msg = deserialize_message(data, CameraMsg)
+        msg: InferResultsArray = deserialize_message(data, InferResultsArray)
 
-        cv_img = bridge.compressed_imgmsg_to_cv2(msg, desired_encoding="passthrough")
+        cv_img = bridge.compressed_imgmsg_to_cv2(msg.images[0], desired_encoding="passthrough")
 
         path = "output/test"
         if not os.path.exists(path):
             os.makedirs(path)
 
-        cv2.imwrite((path + "/%06i.jpg") % count, cv_img)
-        print("Writing image %i" % count)
+        if (count % 10) == 0:
+            cv2.imwrite((path + "/%06i.jpg") % count, cv_img)
+            print("Writing image %i" % count)
+        
         count += 1
 
 
