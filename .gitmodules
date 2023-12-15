@@ -52,3 +52,6 @@
 	path = deps/deepracer-viz
 	url = https://github.com/jochem725/deepracer-viz
 	branch = v2
+[submodule "src/aws-deepracer-systems-pkg"]
+	path = src/aws-deepracer-systems-pkg
+	url = https://github.com/larsll/aws-deepracer-systems-pkg
