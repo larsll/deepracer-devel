@@ -32,7 +32,7 @@
 [submodule "src/aws-deepracer-model-optimizer-pkg"]
 	path = src/aws-deepracer-model-optimizer-pkg
 	url = https://github.com/aws-deepracer/aws-deepracer-model-optimizer-pkg
-	branch = main
+	branch = cache-load
 [submodule "src/aws-deepracer-navigation-pkg"]
 	path = src/aws-deepracer-navigation-pkg
 	url = https://github.com/larsll/aws-deepracer-navigation-pkg
@@ -55,3 +55,4 @@
 [submodule "src/aws-deepracer-systems-pkg"]
 	path = src/aws-deepracer-systems-pkg
 	url = https://github.com/larsll/aws-deepracer-systems-pkg
+	branch = optimized-model
