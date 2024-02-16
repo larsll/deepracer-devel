@@ -56,3 +56,6 @@
 	path = src/aws-deepracer-systems-pkg
 	url = https://github.com/larsll/aws-deepracer-systems-pkg
 	branch = optimized-model
+[submodule "deps/tensorflow"]
+	path = deps/tensorflow
+	url = https://github.com/tensorflow/tensorflow.git
