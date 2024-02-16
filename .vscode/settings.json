@@ -3,10 +3,12 @@
     "python.autoComplete.extraPaths": [
         "/opt/ros/foxy/lib/python3.8/site-packages/",
         "./install/lib/python3.8/site-packages",
+        "/usr/local/lib/python3.8/dist-packages"
     ],
     "python.analysis.extraPaths": [
         "/opt/ros/foxy/lib/python3.8/site-packages/",
-        "./install/lib/python3.8/site-packages",    ],
+        "./install/lib/python3.8/site-packages",
+        "/usr/local/lib/python3.8/dist-packages"],
     "python.envFile": "${workspaceFolder}/.vscode/pythonenv",    
     "files.associations": {
         "condition_variable": "cpp",

@@ -1,0 +1,4 @@
+extension-pkg-whitelist=cv2, tensorflow.*
+
+[TYPECHECK]
+# ignored-modules=tensorflow.* # https://github.com/pylint-dev/pylint/issues/2603
