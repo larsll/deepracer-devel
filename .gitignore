@@ -54,3 +54,5 @@ CATKIN_IGNORE
 output/
 
 *.out
+
+deps/ros2_tflite/build/*

@@ -79,7 +79,10 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "variant": "cpp",
-        "*.ipp": "cpp"
+        "*.ipp": "cpp",
+        "any": "cpp",
+        "forward_list": "cpp",
+        "unordered_set": "cpp"
     },
     "ros.distro": "foxy",
     "autopep8.args": [
