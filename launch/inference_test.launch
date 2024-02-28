@@ -1,0 +1,19 @@
+<launch >
+  <arg name="fps" default="15" />
+  <node pkg="camera_pkg" namespace="camera_pkg" exec="camera_node" output="log">
+      <param name="resize_images" type="bool" value="False" /> 
+      <param name="resize_images_factor" type="int" value="2" /> 
+      <param name="display_topic_enable" type="bool" value="True" /> 
+      <param name="fps" type="int" value="$(var fps)" />
+      <param name="mask_images" type="float" value="-0.1" />
+      <param name="mask_images_color" type="float" value="0.5" />
+  </node>
+  <node pkg="sensor_fusion_pkg" namespace="sensor_fusion_pkg" exec="sensor_fusion_node" output="log">
+      <param name="image_transport" type="str" value="compressed" />
+  </node>
+  <node pkg="inference_pkg" namespace="inference_pkg" exec="inference_node" output="log">
+    <param name="device" type="str" value="CPU" />
+  </node>
+  <node pkg="deepracer_navigation_pkg" namespace="deepracer_navigation_pkg" exec="deepracer_navigation_node" output="log" />
+
+</launch>
