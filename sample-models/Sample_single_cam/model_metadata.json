@@ -75,6 +75,5 @@
             "speed": 2,
             "index": 14
         }
-    ],
-    "sensor": ["observation"]
+    ]
 }
