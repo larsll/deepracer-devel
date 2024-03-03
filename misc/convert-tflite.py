@@ -105,17 +105,10 @@ class SensorInputTypes(Enum):
     STEREO_CAMERAS = 6
 
 
-class TrainingAlgorithms(Enum):
-    """Enum listing the training algorithms supported.
-    """
-    CLIPPED_PPO = 1
-    SAC = 2
-
-
 # Mapping between the training algorithm and input head network names.
 INPUT_HEAD_NAME_MAPPING = {
-    TrainingAlgorithms.CLIPPED_PPO: "main",
-    TrainingAlgorithms.SAC: "policy"
+    TrainingAlgorithms.clipped_ppo: "main",
+    TrainingAlgorithms.sac: "policy"
 }
 
 

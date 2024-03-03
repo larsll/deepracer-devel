@@ -35,7 +35,7 @@ RUN curl -o  GPG-PUB-KEY-INTEL-SW-PRODUCTS https://apt.repos.intel.com/intel-gpg
     /opt/intel/openvino_"${build_id}"/deployment_tools/model_optimizer/install_prerequisites/install_prerequisites.sh tf && \
     ln --symbolic /opt/intel/openvino_"${build_id}"/ /opt/intel/openvino
 
-RUN pip3 install -U pip setuptools
+RUN pip3 install -U pip "setuptools==58.2.0"
 RUN pip3 install -U smbus2 pillow transforms3d autopep8 opencv-python pyserial rosbags "protobuf<3.21" "pandas<1.5" "tensorflow" "tensorboard" nbconvert ipykernel "numpy~=1.19.2"
 
 # Create the user

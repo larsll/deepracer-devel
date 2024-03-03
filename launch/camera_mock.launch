@@ -1,12 +1,19 @@
 <launch >
   <arg name="fps" default="15" />
-  <node pkg="debug_pkg" namespace="camera_pkg" exec="camera_replay_node" output="log">
+  <node pkg="debug_pkg" namespace="camera_pkg" exec="single_picture_injection_node" output="log">
       <param name="resize_images" type="bool" value="True" /> 
       <param name="resize_images_factor" type="int" value="4" />       
-      <param name="display_topic_enable" type="bool" value="True" /> 
-      <param name="blur_image" type="bool" value="True" />       
+      <param name="display_topic_enable" type="bool" value="False" /> 
+      <param name="blur_image" type="bool" value="False" />       
       <param name="fps" type="int" value="$(var fps)" />
-      <param name="input_file" type="str" value="output/2022-10-23-17-42-19.bag" />      
+      <param name="input_file" type="str" value="output/test/000001.jpg" />      
   </node>
-  <node pkg="web_video_server" exec="web_video_server" />
+    <node pkg="sensor_fusion_pkg" namespace="sensor_fusion_pkg" exec="sensor_fusion_node" output="log">
+      <param name="image_transport" type="str" value="compressed" />
+  </node>
+  <node pkg="inference_pkg" namespace="inference_pkg" exec="inference_node" output="log">
+    <param name="device" type="str" value="CPU" />
+    <param name="inference_engine" type="str" value="TFLITE" />
+  </node>
+  <node pkg="deepracer_navigation_pkg" namespace="deepracer_navigation_pkg" exec="deepracer_navigation_node" output="log" />
 </launch>
