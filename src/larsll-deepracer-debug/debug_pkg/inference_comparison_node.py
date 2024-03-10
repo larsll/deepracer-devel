@@ -4,6 +4,7 @@ import traceback
 import glob
 import json
 import logging
+import time
 import sys
 import os
 import cv2
@@ -68,6 +69,8 @@ class InferenceComparisonNode(Node):
             type=ParameterType.PARAMETER_STRING))
         self.declare_parameter('output_dir', None, ParameterDescriptor(
             type=ParameterType.PARAMETER_STRING))
+        self.declare_parameter('autostart', True, ParameterDescriptor(
+            type=ParameterType.PARAMETER_BOOL))
 
         self._resize_images = self.get_parameter('resize_images').value
         self._resize_images_factor = self.get_parameter('resize_images_factor').value
@@ -77,6 +80,7 @@ class InferenceComparisonNode(Node):
         self._image_dir = self.get_parameter('image_dir').value
         self._model_dir = self.get_parameter('model_dir').value
         self._output_dir = self.get_parameter('output_dir').value
+        self._autostart = self.get_parameter('autostart').value
 
         # Init cv bridge
         self._bridge = CvBridge()
@@ -125,13 +129,23 @@ class InferenceComparisonNode(Node):
 
         self.get_logger().info('Node started. Ready to start playback.')
 
+        if self._autostart:
+            self._infer_ov_load.wait_for_service()
+            self._infer_tflite_load.wait_for_service()
+            self.get_logger().info('Starting playback automatically.')
+            self_start = self.create_client(VideoStateSrv, ACTIVATE_CAMERA_SERVICE_NAME)
+            req = VideoStateSrv.Request()
+            req.activate_video = 1
+            _ = self_start.call_async(req)
+
         return self
 
     def __exit__(self, ExcType, ExcValue, Traceback):
         """Called when the object is destroyed.
         """
-        self.get_logger().info('Stopping the node due to {}.'
-                               .format(ExcType.__name__))
+        if ExcType is not None:
+            self.get_logger().info('Stopping the node due to {}.'
+                                .format(ExcType.__name__))
         if self._play_state != PlaybackState.Stopped:
             self._play_state = PlaybackState.Stopped
             self._stop_playback()
@@ -183,6 +197,9 @@ class InferenceComparisonNode(Node):
             # Prepare timer
             self._playback_timer = self.create_timer(1.0/(self._fps), self._playback_timer_cb,
                                                      callback_group=self._main_cbg)
+
+            self._play_state = PlaybackState.Running
+
         except Exception as e:  # noqa E722
             self.get_logger().error("{} occurred.".format(traceback.format_exc()))
 
@@ -200,6 +217,10 @@ class InferenceComparisonNode(Node):
 
             # Create summary
             self._create_summary()
+
+            # Stop ROS if autostart
+            if self._autostart:
+                self.context.try_shutdown()
 
         except Exception as e:  # noqa E722
             self.get_logger().error("{} occurred.".format(traceback.format_exc()))
@@ -249,6 +270,7 @@ class InferenceComparisonNode(Node):
 
         except IndexError:
             self.get_logger().info("End of stream after {} messages.".format(self._playback_frames))
+            self._playback_timer.cancel()
             self._stop_playback()
         except:  # noqa E722
             self.get_logger().error("{} occurred.".format(str(traceback.print_exc())))
@@ -367,7 +389,7 @@ def main(args=None):
     except:  # noqa: E722
         logging.exception("Error in Node")
 
-    rclpy.shutdown()
+    rclpy.try_shutdown()
 
 
 if __name__ == "__main__":
