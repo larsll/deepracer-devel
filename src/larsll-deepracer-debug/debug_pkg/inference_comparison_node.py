@@ -5,6 +5,7 @@ import glob
 import json
 import logging
 import sys
+import os
 import cv2
 from cv_bridge import CvBridge
 
@@ -21,14 +22,20 @@ from rcl_interfaces.msg import ParameterDescriptor, ParameterType
 from sensor_msgs.msg import Image as ROSImg
 from sensor_msgs.msg import CompressedImage as ROSCImg
 
-from deepracer_interfaces_pkg.msg import CameraMsg, InferResultsArray, InferResults
-from deepracer_interfaces_pkg.srv import VideoStateSrv
+from deepracer_interfaces_pkg.msg import CameraMsg, InferResultsArray
+from deepracer_interfaces_pkg.srv import VideoStateSrv, LoadModelSrv, InferenceStateSrv
 
 from debug_pkg.constants import PlaybackState
 
 CAMERA_MSG_TOPIC = "video_mjpeg"
 DISPLAY_MSG_TOPIC = "display_mjpeg"
 ACTIVATE_CAMERA_SERVICE_NAME = "media_state"
+TFLITE_INFERENCE_TOPIC = "/inference_pkg_tflite/rl_results"
+TFLITE_LOAD_SRV = "/inference_pkg_tflite/load_model"
+TFLITE_START_SRV = "/inference_pkg_tflite/inference_state"
+OV_INFERENCE_TOPIC = "/inference_pkg_ov/rl_results"
+OV_LOAD_SRV = "/inference_pkg_ov/load_model"
+OV_START_SRV = "/inference_pkg_ov/inference_state"
 DEFAULT_IMAGE_WIDTH = 640
 DEFAULT_IMAGE_HEIGHT = 480
 
@@ -55,7 +62,11 @@ class InferenceComparisonNode(Node):
             type=ParameterType.PARAMETER_BOOL))
         self.declare_parameter('blur_image', False, ParameterDescriptor(
             type=ParameterType.PARAMETER_BOOL))
-        self.declare_parameter('input_dir', "", ParameterDescriptor(
+        self.declare_parameter('image_dir', "", ParameterDescriptor(
+            type=ParameterType.PARAMETER_STRING))
+        self.declare_parameter('model_dir', "", ParameterDescriptor(
+            type=ParameterType.PARAMETER_STRING))
+        self.declare_parameter('output_dir', None, ParameterDescriptor(
             type=ParameterType.PARAMETER_STRING))
 
         self._resize_images = self.get_parameter('resize_images').value
@@ -63,7 +74,9 @@ class InferenceComparisonNode(Node):
         self._display_topic_enable = self.get_parameter('display_topic_enable').value
         self._blur_image = self.get_parameter('blur_image').value
         self._fps = self.get_parameter('fps').value
-        self._input_dir = self.get_parameter('input_dir').value
+        self._image_dir = self.get_parameter('image_dir').value
+        self._model_dir = self.get_parameter('model_dir').value
+        self._output_dir = self.get_parameter('output_dir').value
 
         # Init cv bridge
         self._bridge = CvBridge()
@@ -71,6 +84,7 @@ class InferenceComparisonNode(Node):
     def __enter__(self):
 
         self._main_cbg = ReentrantCallbackGroup()
+        self._svc_cbg = ReentrantCallbackGroup()
 
         # Call ROS service to enable the Video Stream
         self._camera_state_srv = self.create_service(VideoStateSrv, ACTIVATE_CAMERA_SERVICE_NAME,
@@ -87,11 +101,25 @@ class InferenceComparisonNode(Node):
 
         # Subscriber to the inference
         self._infer_tflite_sub = self.create_subscription(
-            InferResultsArray, "/inference_pkg_tflite/rl_results", lambda msg: self._inference_cb(msg, "tflite"),
+            InferResultsArray, TFLITE_INFERENCE_TOPIC, lambda msg: self._inference_cb(msg, "tflite"),
             5, callback_group=self._main_cbg)
         self._infer_ov_sub = self.create_subscription(
-            InferResultsArray, "/inference_pkg_ov/rl_results", lambda msg: self._inference_cb(msg, "ov"),
+            InferResultsArray, OV_INFERENCE_TOPIC, lambda msg: self._inference_cb(msg, "ov"),
             5, callback_group=self._main_cbg)
+
+        # Service clients to load model and start inference
+        self._infer_tflite_load = self.create_client(
+            LoadModelSrv, TFLITE_LOAD_SRV, callback_group=self._svc_cbg)
+        self._infer_tflite_state = self.create_client(
+            InferenceStateSrv, TFLITE_START_SRV, callback_group=self._svc_cbg)
+        self._infer_ov_load = self.create_client(
+            LoadModelSrv, OV_LOAD_SRV, callback_group=self._svc_cbg)
+        self._infer_ov_state = self.create_client(
+            InferenceStateSrv, OV_START_SRV, callback_group=self._svc_cbg)
+
+        with open(os.path.join(self._model_dir,'model_metadata.json')) as model_metadata:
+            file_contents = model_metadata.read()
+            self._model_metadata = json.loads(file_contents)
 
         self._playback_timer = None
 
@@ -114,20 +142,49 @@ class InferenceComparisonNode(Node):
     def _start_playback(self):
         """ Method that is used to start the playback.
         """
-        self.get_logger().info("Reading {}.".format(self._input_dir))
+        try:
+            self.get_logger().info("Reading {}.".format(self._image_dir))
 
-        self._picture_files = glob.glob(f"{self._input_dir}/*.jpg")
-        self._results = {}
-        self._frame_count = {}
-        self._frame_count['tflite'] = 0
-        self._frame_count['ov'] = 0
+            self._picture_files = glob.glob(f"{self._image_dir}/*.jpg")
+            self._results = {}
+            self._frame_count = {}
+            self._frame_count['tflite'] = 0
+            self._frame_count['ov'] = 0
+            self._frame_count['match'] = 0
+            self._frame_count['mismatch'] = 0
 
+            self.get_logger().info("Found {} files.".format(len(self._picture_files)))
 
-        self.get_logger().info("Found {} files.".format(len(self._picture_files)))
+            # Load the model
+            tflite_model_call = LoadModelSrv.Request()
+            tflite_model_call.artifact_path = os.path.join(self._model_dir, "model.tflite")
+            tflite_model_call.action_space_type = 1
+            tflite_model_call.task_type = 0
+            tflite_model_call.pre_process_type = 1
 
-        # Prepare timer
-        self._playback_timer = self.create_timer(1.0/(self._fps), self._playback_timer_cb,
-                                                 callback_group=self._main_cbg)
+            _ = self._infer_tflite_load.call(tflite_model_call)
+
+            ov_model_call = LoadModelSrv.Request()
+            ov_model_call.artifact_path = os.path.join(self._model_dir, "model.xml")
+            ov_model_call.action_space_type = 1
+            ov_model_call.task_type = 0
+            ov_model_call.pre_process_type = 1
+
+            _ = self._infer_ov_load.call(ov_model_call)
+
+            # Start inference
+            start_infer_call = InferenceStateSrv.Request()
+            start_infer_call.start = 1
+            start_infer_call.task_type = 0
+
+            _ = self._infer_tflite_state.call(start_infer_call)
+            _ = self._infer_ov_state.call(start_infer_call)
+
+            # Prepare timer
+            self._playback_timer = self.create_timer(1.0/(self._fps), self._playback_timer_cb,
+                                                     callback_group=self._main_cbg)
+        except Exception as e:  # noqa E722
+            self.get_logger().error("{} occurred.".format(traceback.format_exc()))
 
     def _stop_playback(self):
 
@@ -140,7 +197,7 @@ class InferenceComparisonNode(Node):
 
             # Stop timer
             self._playback_timer.destroy()
-                    
+
             # Create summary
             self._create_summary()
 
@@ -230,7 +287,8 @@ class InferenceComparisonNode(Node):
         timestamp_str = str(timestamp.nanoseconds)
         time_diff: Duration = self.get_clock().now() - timestamp
         self._frame_count[node] += 1
-        self.get_logger().info(f"Received message {self._frame_count[node]} from {node} after {(time_diff.nanoseconds/1.0e6):.1f} ms")
+        self.get_logger().info(
+            f"Received message {self._frame_count[node]} from {node} after {(time_diff.nanoseconds/1.0e6):.1f} ms")
 
         self._results[timestamp_str][node] = {}
         self._results[timestamp_str][node]['time'] = {}
@@ -241,6 +299,10 @@ class InferenceComparisonNode(Node):
             self._results[timestamp_str][node]['results'][res.class_label] = res.class_prob
 
     def _create_summary(self):
+
+        output = {}
+        output['model'] = self._model_dir
+        output['model_metadata'] = self._model_metadata
 
         # Check results
         for key, value in self._results.items():
@@ -268,18 +330,26 @@ class InferenceComparisonNode(Node):
             self._results[key]['summary']['best']['tflite'] = tf_best
             self._results[key]['summary']['best']['ov'] = ov_best
 
-            if self._results[key]['summary']['best']['tflite']['action'] == self._results[key]['summary']['best']['ov']['action']:
+            if self._results[key]['summary']['best']['tflite']['action'] == self._results[key]['summary']['best'][
+                    'ov']['action']:
                 self.get_logger().info(
                     f"Picture {key} in agreement for action {self._results[key]['summary']['best']['tflite']['action']} at ({self._results[key]['summary']['best']['tflite']['value']:.5f}, {self._results[key]['summary']['best']['ov']['value']:.5f}).")
+                self._frame_count['match'] += 1
             else:
                 self.get_logger().info(
                     f"Picture {key} not in agreement  with actions ({self._results[key]['summary']['best']['tflite']['action']}, {self._results[key]['summary']['best']['ov']['action']}) at ({self._results[key]['summary']['best']['tflite']['value']:.5f}, {self._results[key]['summary']['best']['ov']['value']:.5f}).")
+                self._frame_count['mismatch'] += 1
+
+        output['frames'] = self._results
+        output['summary'] = self._frame_count
 
         # Writing to disk
         filename = f"results-{int(datetime.datetime.utcnow().timestamp() * 1000)}.json"
+        if self._output_dir is not None:
+            filename = os.path.join(self._output_dir, filename)
         with open(filename, "w", encoding="utf-8") as f:
             self.get_logger().info(f"Writing {filename} to disk.")
-            json.dump(self._results, f, ensure_ascii=False, indent=4)
+            json.dump(output, f, ensure_ascii=False, indent=4)
 
 def main(args=None):
 
