@@ -24,7 +24,8 @@ setup(
         'console_scripts': [
             'imu = debug_pkg.debug_imu_node:main',
             'camera_replay_node = debug_pkg.camera_replay_node:main',
-            'single_picture_injection_node = debug_pkg.single_picture_injection_node:main'
+            'single_picture_injection_node = debug_pkg.single_picture_injection_node:main',
+            'inference_comparison_node = debug_pkg.inference_comparison_node:main'
         ],
     },
 )
