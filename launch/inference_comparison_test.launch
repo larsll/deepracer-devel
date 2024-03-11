@@ -1,12 +1,14 @@
 <launch >
   <arg name="fps" default="30" />
+  <arg name="image_dir" default="/workspaces/deepracer-devel/output/test" />
+  <arg name="model_dir" default="/workspaces/deepracer-devel/sample-models/Sample_single_cam" />
   <node pkg="debug_pkg" namespace="camera_pkg" exec="inference_comparison_node" output="log" >
       <param name="resize_images" type="bool" value="True" /> 
       <param name="display_topic_enable" type="bool" value="False" /> 
       <param name="fps" type="int" value="$(var fps)" />
-      <param name="image_dir" type="str" value="/workspaces/deepracer-devel/output/test/" />
-      <param name="model_dir" type="str" value="/workspaces/deepracer-devel/sample-models/Sample_single_cam" /> 
-      <param name="output_dir" type="str" value="/workspaces/deepracer-devel/output" />      
+      <param name="image_dir" type="str" value="$(var image_dir)" />
+      <param name="model_dir" type="str" value="$(var model_dir)" /> 
+      <param name="output_dir" type="str" value="$(var image_dir)" />      
   </node>
   <node pkg="sensor_fusion_pkg" namespace="sensor_fusion_pkg" exec="sensor_fusion_node" output="log">
       <param name="image_transport" type="str" value="compressed" />

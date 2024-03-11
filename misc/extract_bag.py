@@ -21,7 +21,7 @@ def get_rosbag_options(path, serialization_format='cdr'):
 
 
 def main():
-    bag_path = '/workspaces/deepracer-devel/output/reinvent_logs/deepracer-bag-20221201-150502'
+    bag_path = '/workspaces/deepracer-devel/output/reinvent_logs/deepracer-bag-20221130-171332'
     storage_options, converter_options = get_rosbag_options(bag_path)
 
     reader = rosbag2_py.SequentialReader()
@@ -39,13 +39,12 @@ def main():
 
         cv_img = bridge.compressed_imgmsg_to_cv2(msg.images[0], desired_encoding="passthrough")
 
-        path = "output/test"
+        path = "output/deepracer-bag-20221130-171332"
         if not os.path.exists(path):
             os.makedirs(path)
 
-        if (count % 10) == 0:
-            cv2.imwrite((path + "/%06i.jpg") % count, cv_img)
-            print("Writing image %i" % count)
+        cv2.imwrite((path + "/%06i.jpg") % count, cv_img)
+        print("Writing image %i" % count)
         
         count += 1
 
