@@ -159,7 +159,7 @@ class InferenceComparisonNode(Node):
         try:
             self.get_logger().info("Reading {}.".format(self._image_dir))
 
-            self._picture_files = glob.glob(f"{self._image_dir}/*.jpg")
+            self._picture_files = sorted(glob.glob(f"{self._image_dir}/*.jpg"))
             self._results = {}
             self._frame_count = {}
             self._frame_count['tflite'] = 0
@@ -362,8 +362,8 @@ class InferenceComparisonNode(Node):
                     f"Picture {key} not in agreement  with actions ({self._results[key]['summary']['best']['tflite']['action']}, {self._results[key]['summary']['best']['ov']['action']}) at ({self._results[key]['summary']['best']['tflite']['value']:.5f}, {self._results[key]['summary']['best']['ov']['value']:.5f}).")
                 self._frame_count['mismatch'] += 1
 
-        output['frames'] = self._results
         output['summary'] = self._frame_count
+        output['frames'] = self._results
 
         # Writing to disk
         filename = f"results-{int(datetime.datetime.utcnow().timestamp() * 1000)}.json"
