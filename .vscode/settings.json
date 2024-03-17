@@ -88,7 +88,6 @@
         "hash_set": "cpp",
         "scoped_allocator": "cpp"
     },
-    "ros.distro": "foxy",
     "autopep8.args": [
         "--max-line-length",
         "120",

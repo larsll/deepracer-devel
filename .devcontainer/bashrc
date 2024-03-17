@@ -17,3 +17,4 @@ if [[ -f "./install/local_setup.bash" ]]; then
     source ./install/local_setup.bash
 fi
 
+export PYTHONWARNINGS=ignore:::setuptools.command.install
