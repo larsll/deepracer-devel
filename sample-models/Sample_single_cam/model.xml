@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<net name="Sample_single_cam/model" version="10">
+<net name="/workspaces/deepracer-devel/sample-models/Sample_single_cam/model" version="10">
 	<layers>
 		<layer id="0" name="main_level/agent/main/online/network_1/sub/Output_0/Data_/copy_const" type="Const" version="opset1">
 			<data offset="0" size="2" shape="1,1" element_type="f16"/>
@@ -395,7 +395,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="24" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/MatMul/1_port_transpose756_const" type="Const" version="opset1">
+		<layer id="24" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/MatMul/1_port_transpose760_const" type="Const" version="opset1">
 			<data offset="143726" size="11534336" shape="512,11264" element_type="f16"/>
 			<output>
 				<port id="1" precision="FP16">
@@ -418,7 +418,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="26" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/kernel/read/Shape/Gather/Cast_11208_const" type="Const" version="opset1">
+		<layer id="26" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/kernel/read/Shape/Gather/Cast_11206_const" type="Const" version="opset1">
 			<data offset="11678062" size="4" shape="1" element_type="i32"/>
 			<output>
 				<port id="1" precision="I32">
@@ -426,7 +426,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="27" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/kernel/read/Shape/Gather/Cast_21210_const" type="Const" version="opset1">
+		<layer id="27" name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/kernel/read/Shape/Gather/Cast_21208_const" type="Const" version="opset1">
 			<data offset="11678066" size="8" shape="" element_type="i64"/>
 			<output>
 				<port id="1" precision="I64"/>
@@ -607,7 +607,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="39" name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/MatMul/1_port_transpose760_const" type="Const" version="opset1">
+		<layer id="39" name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/MatMul/1_port_transpose756_const" type="Const" version="opset1">
 			<data offset="11679100" size="15360" shape="15,512" element_type="f16"/>
 			<output>
 				<port id="1" precision="FP16">
@@ -756,7 +756,7 @@
 			<log_level value="ERROR"/>
 			<mean_scale_values value="{}"/>
 			<mean_values value="()"/>
-			<model_name value="Sample_single_cam/model"/>
+			<model_name value="/workspaces/deepracer-devel/sample-models/Sample_single_cam/model"/>
 			<output_dir value="DIR"/>
 			<placeholder_data_types value="{}"/>
 			<placeholder_shapes value="{'main_level/agent/main/online/network_0/observation/observation': array([  1, 120, 160,   1])}"/>

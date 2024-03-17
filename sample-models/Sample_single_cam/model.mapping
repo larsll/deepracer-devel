@@ -5,32 +5,44 @@
 		<IR name="main_level/agent/main/online/network_0/observation/observation" out_port_id="0" id="1"/>
 	</map>
 	<map>
-		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_4/kernel/read" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_4/kernel/read/Output_0/Data__const" out_port_id="1" id="16"/>
+		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_0/kernel/read" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_0/kernel/read/Output_0/Data__const" out_port_id="1" id="6"/>
 	</map>
 	<map>
-		<framework name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_5_activation" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_5_activation/Transpose" out_port_id="2" id="22"/>
+		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_0/Conv2D" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_0/Conv2D" out_port_id="2" id="7"/>
 	</map>
 	<map>
-		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_2/Conv2D" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_2/Conv2D" out_port_id="2" id="12"/>
+		<framework name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_1_activation" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_1_activation" out_port_id="1" id="10"/>
 	</map>
 	<map>
 		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_2/kernel/read" out_port_id="0"/>
 		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_2/kernel/read/Output_0/Data__const" out_port_id="1" id="11"/>
 	</map>
 	<map>
+		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_2/Conv2D" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_2/Conv2D" out_port_id="2" id="12"/>
+	</map>
+	<map>
 		<framework name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_3_activation" out_port_id="0"/>
 		<IR name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_3_activation" out_port_id="1" id="15"/>
 	</map>
 	<map>
-		<framework name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/BiasAdd" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/BiasAdd/Add" out_port_id="2" id="33"/>
+		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_4/kernel/read" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_4/kernel/read/Output_0/Data__const" out_port_id="1" id="16"/>
 	</map>
 	<map>
-		<framework name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/MatMul" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/MatMul" out_port_id="2" id="40"/>
+		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_4/Conv2D" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_4/Conv2D" out_port_id="2" id="17"/>
+	</map>
+	<map>
+		<framework name="main_level/agent/main/online/network_1/observation/Flatten/flatten/Reshape" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/observation/Flatten/flatten/Reshape" out_port_id="2" id="30"/>
+	</map>
+	<map>
+		<framework name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/MatMul" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/MatMul" out_port_id="2" id="31"/>
 	</map>
 	<map>
 		<framework name="main_level/agent/main/online/network_1/StopGradient" out_port_id="0"/>
@@ -41,6 +53,10 @@
 		<IR name="main_level/agent/main/online/network_1/middleware_fc_embedder/BatchnormActivationDropout_1_activation" out_port_id="1" id="34"/>
 	</map>
 	<map>
+		<framework name="main_level/agent/main/online/network_1/mul" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/mul" out_port_id="2" id="35"/>
+	</map>
+	<map>
 		<framework name="main_level/agent/main/online/network_1/mul_1" out_port_id="0"/>
 		<IR name="main_level/agent/main/online/network_1/mul_1" out_port_id="2" id="37"/>
 	</map>
@@ -49,67 +65,51 @@
 		<IR name="main_level/agent/main/online/network_1/add" out_port_id="2" id="38"/>
 	</map>
 	<map>
-		<framework name="main_level/agent/main/online/network_1/ppo_head_0/policy" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/ppo_head_0/policy" out_port_id="1" id="43"/>
+		<framework name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/MatMul" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/MatMul" out_port_id="2" id="40"/>
 	</map>
 	<map>
-		<framework name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/kernel/read" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/MatMul/1_port_transpose756_const" out_port_id="1" id="24"/>
+		<framework name="main_level/agent/main/online/network_1/ppo_head_0/policy" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/ppo_head_0/policy" out_port_id="1" id="43"/>
 	</map>
 	<map>
 		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_4/BiasAdd" out_port_id="0"/>
 		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_4/BiasAdd/Add" out_port_id="2" id="19"/>
 	</map>
 	<map>
-		<framework name="main_level/agent/main/online/network_1/observation/sub" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/observation/sub" out_port_id="2" id="5"/>
-	</map>
-	<map>
-		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_0/BiasAdd" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_0/BiasAdd/Add" out_port_id="2" id="9"/>
-	</map>
-	<map>
-		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_4/Conv2D" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_4/Conv2D" out_port_id="2" id="17"/>
-	</map>
-	<map>
-		<framework name="main_level/agent/main/online/network_1/mul" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/mul" out_port_id="2" id="35"/>
-	</map>
-	<map>
 		<framework name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/BiasAdd" out_port_id="0"/>
 		<IR name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/BiasAdd/Add" out_port_id="2" id="42"/>
-	</map>
-	<map>
-		<framework name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_1_activation" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_1_activation" out_port_id="1" id="10"/>
 	</map>
 	<map>
 		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_2/BiasAdd" out_port_id="0"/>
 		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_2/BiasAdd/Add" out_port_id="2" id="14"/>
 	</map>
 	<map>
-		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_0/kernel/read" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_0/kernel/read/Output_0/Data__const" out_port_id="1" id="6"/>
+		<framework name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/BiasAdd" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/BiasAdd/Add" out_port_id="2" id="33"/>
 	</map>
 	<map>
-		<framework name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/MatMul" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/MatMul" out_port_id="2" id="31"/>
+		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_0/BiasAdd" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_0/BiasAdd/Add" out_port_id="2" id="9"/>
 	</map>
 	<map>
 		<framework name="main_level/agent/main/online/network_1/observation/truediv" out_port_id="0"/>
 		<IR name="main_level/agent/main/online/network_1/observation/truediv" out_port_id="2" id="3"/>
 	</map>
 	<map>
-		<framework name="main_level/agent/main/online/network_1/observation/Flatten/flatten/Reshape" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/observation/Flatten/flatten/Reshape" out_port_id="2" id="30"/>
+		<framework name="main_level/agent/main/online/network_1/observation/sub" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/observation/sub" out_port_id="2" id="5"/>
 	</map>
 	<map>
-		<framework name="main_level/agent/main/online/network_1/observation/Conv2d_0/Conv2D" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/observation/Conv2d_0/Conv2D" out_port_id="2" id="7"/>
+		<framework name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_5_activation" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/observation/BatchnormActivationDropout_5_activation/Transpose" out_port_id="2" id="22"/>
 	</map>
 	<map>
 		<framework name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/kernel/read" out_port_id="0"/>
-		<IR name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/MatMul/1_port_transpose760_const" out_port_id="1" id="39"/>
+		<IR name="main_level/agent/main/online/network_1/ppo_head_0/policy_fc/MatMul/1_port_transpose756_const" out_port_id="1" id="39"/>
+	</map>
+	<map>
+		<framework name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/kernel/read" out_port_id="0"/>
+		<IR name="main_level/agent/main/online/network_1/middleware_fc_embedder/Dense_0/MatMul/1_port_transpose760_const" out_port_id="1" id="24"/>
 	</map>
 </mapping>
