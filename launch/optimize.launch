@@ -1,3 +1,5 @@
 <launch >
-  <node pkg="model_optimizer_pkg" namespace="model_optimizer_pkg" exec="model_optimizer_node" output="log" />
+  <node pkg="model_optimizer_pkg" namespace="model_optimizer_pkg" exec="model_optimizer_node" output="log">
+      <param name="inference_engine" type="str" value="TFLITE" />
+  </node>
 </launch>
