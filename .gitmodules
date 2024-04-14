@@ -56,3 +56,6 @@
 	path = src/aws-deepracer-systems-pkg
 	url = https://github.com/larsll/aws-deepracer-systems-pkg
 	branch = optimized-model
+[submodule "src/aws-deepracer-i2c-pkg"]
+	path = src/aws-deepracer-i2c-pkg
+	url = https://github.com/larsll/aws-deepracer-i2c-pkg
