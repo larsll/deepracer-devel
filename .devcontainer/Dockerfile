@@ -9,6 +9,7 @@ ARG USER_GID=$USER_UID
 RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
     libboost-all-dev \
     python3-pip \
+    python3-tk \
     ros-foxy-async-web-server-cpp \
     ros-foxy-tango-icons-vendor \
     ros-foxy-image-transport \
@@ -32,11 +33,10 @@ RUN curl -o  GPG-PUB-KEY-INTEL-SW-PRODUCTS https://apt.repos.intel.com/intel-gpg
     apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS && \
     echo "deb https://apt.repos.intel.com/openvino/2021 all main" | tee /etc/apt/sources.list.d/intel-openvino-2021.list && \
     apt-get update && apt-get install -y --no-install-recommends intel-openvino-dev-ubuntu20-"${build_id}" && \
-    /opt/intel/openvino_"${build_id}"/deployment_tools/model_optimizer/install_prerequisites/install_prerequisites.sh tf && \
     ln --symbolic /opt/intel/openvino_"${build_id}"/ /opt/intel/openvino
 
 RUN pip3 install -U pip "setuptools==58.2.0"
-RUN pip3 install -U smbus2 pillow transforms3d autopep8 opencv-python pyserial rosbags "protobuf<3.21" "pandas<1.5" "tensorflow" "tensorboard" nbconvert ipykernel "numpy~=1.19.2"
+RUN pip3 install -U smbus2 pillow transforms3d autopep8 opencv-python pyserial rosbags "protobuf<3.21" "pandas<1.5" "tensorflow-cpu" "tensorboard" nbconvert ipykernel "numpy~=1.19.2" tqdm "networkx>=1.11" "test-generator==0.1.1" "defusedxml>=0.5.0"
 
 # Create the user
 RUN groupadd --gid $USER_GID $USERNAME \
