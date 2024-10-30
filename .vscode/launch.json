@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["/workspaces/deepracer-devel/sample-models/Sample_stereo_cam/"]
+            "args": ["--bag_path", "/workspaces/deepracer-devel/output/garage_logs_1/duckworth-2023-reInvent-TTP-I-1-4-20240428-155457","--model_path","/workspaces/deepracer-devel/models/2023-reInvent-TTP-I-1-4"]
         }
     ]
 }
