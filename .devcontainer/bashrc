@@ -10,8 +10,8 @@ export XDG_RUNTIME_DIR=/tmp/runtime-$(whoami)
 mkdir -p $XDG_RUNTIME_DIR
 chmod 700 $XDG_RUNTIME_DIR
 
-source /opt/ros/foxy/setup.bash
-source /opt/intel/openvino/bin/setupvars.sh
+source /opt/ros/humble/setup.bash
+source /opt/intel/openvino/setupvars.sh
 
 if [[ -f "./install/local_setup.bash" ]]; then
     source ./install/local_setup.bash

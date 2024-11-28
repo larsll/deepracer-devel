@@ -7,8 +7,7 @@
                 "${workspaceFolder}/build/inference_pkg/_deps/tensorflow-lite-src",
                 "${workspaceFolder}/build/inference_pkg/flatbuffers/include",
                 "/opt/ros/foxy/include/**",
-                "/usr/include/opencv4/",
-                "/opt/intel/openvino_2021/inference_engine/**"
+                "/usr/include/opencv4/"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
